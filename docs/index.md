@@ -1,8 +1,6 @@
 # Welcome to Sabayon Linux Wiki
 
-This is a sample documentation site created using [mkdocs.org](http://mkdocs.org).
-
-And using Travis CI it is automated
+Sabayon Linux is based on the source-based distro named Gentoo. Gentoo is a highly customizable distro and, using Gentoo's excellent development techniques, we have created a pre-configured distribution with the tenets of Performance, Versatility, and Stability. Please see the Introduction and Sabayon Linux sections in this Wiki, and we stress highly that you need to learn how to use the package managers Entropy and Portage (HOWTO: The Complete Portage Guide). We do stress the use of Entropy rather than Portage, but you will need to understand Portage also.
 
 ## Commands
 
