@@ -1,0 +1,14 @@
+site_name: 'Sabayon wiki'
+site_description: 'Documentation for Sabayon Linux'
+site_author: 'Sabayon'
+site_url: 'https://sabayon.github.io/wiki-next/'
+
+repo_name: 'Sabayon/wiki-next'
+repo_url: https://github.com/Sabayon/wiki-next
+
+pages:
+- Home: index.md
+- Projects:
+    - Documentation: projects/documentation.md
+
+theme: 'material'
