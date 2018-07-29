@@ -11,4 +11,4 @@ pages:
 - Projects:
     - Documentation: projects/documentation.md
 
-theme: 'material'
+theme: 'mkdocs'
