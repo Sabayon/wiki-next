@@ -6,15 +6,16 @@ You can edit articles from the browser or by using git to clone and do a pull re
 
 * Click the pencil icon on the screen
 
-![](http://photosbykjs.us/sabayon/doc1.jpg)
+![](http://photosbykjs.us/sabayon/doc1-1.jpg)
 
 * Make your changes
 
-![](http://photosbykjs.us/sabayon/doc2.jpg)
+![](http://photosbykjs.us/sabayon/doc2-1.jpg)
 
 * Submit your changes
 
-![](http://photosbykjs.us/sabayon/doc3.jpg)
+![](http://photosbykjs.us/sabayon/doc3-1.jpg)
+
 
 ## Git
 
