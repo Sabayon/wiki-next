@@ -1,4 +1,3 @@
 # Documentation Project
 
-Documentation on how to contribute to our wiki
-
+Documentation on how to contribute to our wiki​
