@@ -19,7 +19,7 @@ You can edit articles from the browser or by using git to clone and do a pull re
 
 ## Git
 
-* Go to https://github.com/Sabayon/wiki-next and click the Fork button at top left of the screen and create your own fork.
+* Go to [https://github.com/Sabayon/wiki-next](https://github.com/Sabayon/wiki-next) and click the Fork button at top left of the screen and create your own fork.
 * Make the changes needed in your local fork
 * Do a Pull Request
 
