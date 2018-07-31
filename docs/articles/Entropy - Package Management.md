@@ -34,7 +34,7 @@ There are several options you can use when using Equo, a few of the basic comman
 
 Searching for a package can be accomplished by running the equo search command:
 
-    quo search foo
+    equo search foo
 
 To install a package use the install function, the --ask amendment is optional but recommended.
 
