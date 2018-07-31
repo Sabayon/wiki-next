@@ -1,6 +1,6 @@
 ## How to Edit an Article
 
-You can edit articles from the browser or by using git to clone and push.
+You can edit articles from the browser or by using git to clone and do a pull request.
 
 ## Browser
 
@@ -12,6 +12,14 @@ You can edit articles from the browser or by using git to clone and push.
 
 ![](http://photosbykjs.us/sabayon/doc2.jpg)
 
-* Make your changes
+* Submit your changes
 
 ![](http://photosbykjs.us/sabayon/doc3.jpg)
+
+## Git
+
+* Go to https://github.com/Sabayon/wiki-next and click the Fork button at top left of the screen and create your own fork.
+* Make the changes needed
+* Do a Pull Request
+
+If you are new to using git, you can start looking at some [great guides](https://guides.github.com/activities/hello-world/)
