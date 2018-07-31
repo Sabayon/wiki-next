@@ -72,4 +72,5 @@ Rigo is the graphical user interface for package management.
 * Send votes and add comments to Packages
 * and much more...
     
-    
+[![Click to make Bigger](http://photosbykjs.us/sabayon/rigo1-1.jpg)](http://photosbykjs.us/sabayon/rigo1.png)
+[![Click to make Bigger](http://photosbykjs.us/sabayon/rigo2-2.jpg)](http://photosbykjs.us/sabayon/rigo2.png)
