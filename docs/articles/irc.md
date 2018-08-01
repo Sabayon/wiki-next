@@ -23,6 +23,7 @@ Grab your favorite dev flavored iso and try it out, report any issues
 Our Limbo repo is another great way to test, simply add the repo
 
 Report issues to our Mailing List or #sabayon-dev channel, Mailing List would probably be best, that way it won't get lost.  Please include:
+
 * Which ISO you are using
 * Your Hardware
 * How to replicate
