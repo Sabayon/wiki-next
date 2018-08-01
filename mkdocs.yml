@@ -8,7 +8,9 @@ repo_url: https://github.com/Sabayon/wiki-next
 
 pages:
 - Home: index.md
-- Contributing: articles/documentation.md
+- Contributing:
+    - Wiki: articles/documentation.md
+    - IRC|Testers: articles/irc.md
 - Entropy Package Manager:
     - Entropy: articles/Entropy - Package Management.md
     - Fresh Install What to Do: articles/Fresh Install - What to Do.md
