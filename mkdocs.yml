@@ -16,3 +16,4 @@ pages:
     - Fresh Install What to Do: articles/Fresh Install - What to Do.md
 - How To Index: articles/howto.md
 theme: 'material'
+   favicon: 'img/favicon.ico'
