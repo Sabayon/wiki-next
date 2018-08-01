@@ -9,6 +9,7 @@
 
 ## Support
 We depend on the community to help each other out and at times the irc channels can be quiet.
+
 * Be Polite
 * Be Patient
 * Respect the Operators
