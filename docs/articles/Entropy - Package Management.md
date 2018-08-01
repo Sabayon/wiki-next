@@ -74,3 +74,24 @@ Rigo is the graphical user interface for package management.
     
 [![Click to make Bigger](http://photosbykjs.us/sabayon/rigo1-1.jpg)](http://photosbykjs.us/sabayon/rigo1.png)
 [![Click to make Bigger](http://photosbykjs.us/sabayon/rigo2-2.jpg)](http://photosbykjs.us/sabayon/rigo2.png)
+
+## Kernel-Switcher
+
+kernel-switcher is an easy-to-use tool to simplify upgrading the kernel in Sabayon Linux. Remember, doing regular upgrades will not upgrade major version of the kernel, only minor (I.e. 3.12.3 → 3.12.4: YES || 3.12.3 → 3.13.0: NO). To upgrade major version of the kernel, you need to invoke a kernel change. 
+
+    # kernel-switcher --help
+ 
+     >> kernel-switcher - Sabayon Linux Kernel Switcher BETA
+     >>   switch kernel:     kernel-switcher switch <kernel package>
+     >>   list kernels:      kernel-switcher list
+     >>   this help:         kernel-switcher help
+     
+The kernel-switcher list command is a nice feature, but can be overwhelming as it lists all kernels currently available in the repository. You may prefer to use **equo search linux-sabayon** as linux-sabayon is the Sabayon kernel package. With equo search linux-sabayon you can see if any newer kernels exist. For example, if you find that linux-sabayon-3.8.0 is available as an upgrade, you would upgrade to it as follows:
+
+     # kernel-switcher switch linux-sabayon-3.8.0
+     >>  @@ Calculating dependencies …
+     >>  ## [U] [sabayonlinux.org] sys-kernel/linux-firmwares-3.8.0|0   [3.8.0|0]
+     >>  ## [N] [sabayonlinux.org] sys-kernel/linux-sabayon-3.8.0|0
+     >>  ## [N] [sabayonlinux.org] net-wireless/broadcom-sta-5.100.82.38-r1#3.8.0-sabayon|0
+     >>  ## [N] [sabayonlinux.org] x11-drivers/nvidia-drivers-260.19.29#3.8.0-sabayon|0
+
