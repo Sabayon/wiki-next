@@ -1,5 +1,3 @@
-## Fresh Install - What to do
-
 So you just installed a fresh copy of Sabayon Lixux and are wondering what to do next.
 
 Entropy is the package manager and will be vital to know. First thing you will want to do is sort your mirrors. All commands must be run as root, so su or sudo.
