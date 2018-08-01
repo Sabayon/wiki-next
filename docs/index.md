@@ -1,5 +1,5 @@
 
-![](https://static.sabayon.org/logo/sabayonlogo1.svg)
+![](http://photosbykjs.us/sabayon/sabayon_wiki.png)
 
 # Welcome to Sabayon Linux Wiki
 
