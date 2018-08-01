@@ -17,11 +17,3 @@ pages:
 - How To Index: articles/howto.md
 theme: 'material'
   favicon: 'img/favicon.ico'
-extra:
-  social:
-    - type: 'github'
-      link: 'https://github.com/Sabayon/'
-    - type: 'facebook'
-      link: 'http://www.facebook.com/group.php?gid=36125411841'
-    - type: 'google+'
-      link: 'https://plus.google.com/u/0/communities/111215969224831918857'
