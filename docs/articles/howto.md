@@ -1,10 +1,4 @@
-## Add Howto 
 
-* Create your howto page
-* Add your howto below
-* [Link](https://www.mkdocs.org/user-guide/writing-your-docs/#linking-documents) your howto to your newly created page
-
-************************************************
 
 A | B | C
 ------------ | ------------- | -------------
@@ -68,3 +62,12 @@ Z |
   |   | 
   |   | 
   |   | 
+  
+  
+## Howto 
+
+* Create your howto page
+* Add your howto above
+* [Link](https://www.mkdocs.org/user-guide/writing-your-docs/#linking-documents) your howto to your newly created page
+
+************************************************
