@@ -104,11 +104,11 @@ With "-D PHP" option you can manage multiple PHP version installed in your syste
       [1]   php5.6 *
       [2]   php7.0
 
-Set PHP version you want ; Example : php7.0 ( [2] index )
+Set PHP version you want ; Example : php7.0
 
     # eselect php set apache2 2 
 
-Back to php5.6 version ( [1] index )
+Back to php5.6 version
 
     # eselect php set apache2 1 
 
