@@ -14,8 +14,8 @@ We are starting a fresh wiki and need your help with rebuilding material to help
 
 #### Entropy Package manager
 
-* [Entropy](articles/Entropy-PackageManagement.md)
-* [Fresh Install What to Do](articles/FreshInstall-WhattoDo.md)
+* [Entropy](articles/Entropy.md)
+* [Fresh Install What to Do](articles/FreshInstall.md)
 
 
 
