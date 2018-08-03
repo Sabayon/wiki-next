@@ -17,5 +17,3 @@
 * Create your howto page
 * Add your howto above
 * [Link](https://www.mkdocs.org/user-guide/writing-your-docs/#linking-documents) your howto to your newly created page
-
-************************************************
