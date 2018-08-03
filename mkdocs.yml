@@ -12,8 +12,8 @@ pages:
     - Wiki: articles/documentation.md
     - IRC|Testers: articles/irc.md
 - Entropy Package Manager:
-    - Entropy: articles/Entropy-PackageManagement.md
-    - Fresh Install What to Do: articles/FreshInstall-WhattoDo.md
+    - Entropy: articles/Entropy.md
+    - Fresh Install What to Do: articles/FreshInstall.md
 - How To Index:
     - Applications:
     - Hardware:
