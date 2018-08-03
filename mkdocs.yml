@@ -18,4 +18,5 @@ pages:
     - Networking:
         - Web:
             - LAMP: articles/lamp.md
-theme: 'material'
+theme:
+  name: 'material'
