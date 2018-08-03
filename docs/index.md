@@ -10,6 +10,6 @@ We are starting a fresh wiki and need your help with rebuilding material to help
 
 |   |   Help by Contributing |   |   Entropy Package manager   |   |
 |---|---|---|---|---|
-|   |  [Wiki](articles/documentation.md) |   |  [Learn about Entropy](article/Package Management.md) |   |
-|   | [IRC and Testers](articles/irc.md)   |   | [Fresh Install](article/What to Do.md)  |   |
+|   |  [Wiki](articles/documentation.md) |   |  [Learn about Entropy](articles/Package Management.md) |   |
+|   | [IRC and Testers](articles/irc.md)   |   | [Fresh Install](articles/What to Do.md)  |   |
 |   |   |   |   |   |
