@@ -15,12 +15,7 @@ pages:
     - Entropy: articles/Entropy.md
     - Fresh Install What to Do: articles/FreshInstall.md
 - How To Index:
-    - Applications:
-    - Hardware:
     - Networking:
         - Web:
             - LAMP: articles/lamp.md
-    - System Administration:
-        - Security:
-        - Desktop Environments:
 theme: 'material'
