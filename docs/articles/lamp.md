@@ -74,25 +74,7 @@ Apache2 configuration file is stored at
 
 * /etc/conf.d/apache2
 
-Basically we need to edit APACHE2_OPTS option
-
-* /etc/conf.d/apache2
-
-      APACHE2_OPTS="-D DEFAULT_VHOST -D INFO -D SSL -D SSL_DEFAULT_VHOST -D LANGUAGE" 
-
-Configure Apache and PHP5
-
-* /etc/conf.d/apache2
-
-      APACHE2_OPTS="-D DEFAULT_VHOST -D INFO -D SSL -D SSL_DEFAULT_VHOST -D LANGUAGE -D PHP5" 
-
-Configure Apache and PHP7
-
-* /etc/conf.d/apache2
-
-      APACHE2_OPTS="-D DEFAULT_VHOST -D INFO -D SSL -D SSL_DEFAULT_VHOST -D LANGUAGE -D PHP7" 
-
-Configure Apache and all PHP versions installed
+Basically we need to edit APACHE2_OPTS option. Configure Apache and all PHP versions installed
 
 * /etc/conf.d/apache2
 
