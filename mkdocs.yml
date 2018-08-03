@@ -12,7 +12,7 @@ pages:
     - Wiki: articles/documentation.md
     - IRC|Testers: articles/irc.md
 - Entropy Package Manager:
-    - Entropy: articles/Entropy - Package Management.md
-    - Fresh Install What to Do: articles/Fresh Install - What to Do.md
+    - Entropy: articles/Entropy-PackageManagement.md
+    - Fresh Install What to Do: articles/FreshInstall-WhattoDo.md
 - How To Index: articles/howto.md
 theme: 'material'

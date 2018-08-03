@@ -8,8 +8,15 @@ Sabayon Linux is based on the source-based distro named Gentoo. Gentoo is a high
 We are starting a fresh wiki and need your help with rebuilding material to help the Community
 
 
-|   |   Help by Contributing |   |   Entropy Package manager   |   |
-|---|---|---|---|---|
-|   |  [Wiki](articles/documentation.md) |   |  [Learn about Entropy](articles/Package Management.md) |   |
-|   | [IRC and Testers](articles/irc.md)   |   | [Fresh Install](articles/What to Do.md)  |   |
-|   |   |   |   |   |
+#### Help by Contributing 
+* [Wiki](articles/documentation.md)
+* [IRC and Testers](articles/irc.md)
+
+#### Entropy Package manager
+
+* [Entropy](articles/Entropy-PackageManagement.md)
+* [Fresh Install What to Do](articles/FreshInstall-WhattoDo.md)
+
+
+
+
