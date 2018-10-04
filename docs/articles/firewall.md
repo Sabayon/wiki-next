@@ -1,4 +1,4 @@
-On Sabayon systems the firewall is controlled by firewalld.
+## On Sabayon systems the firewall is controlled by firewalld.
 
 Starting or stopping the firewall service on a Sabayon can be done with these commands:
 
