@@ -1,4 +1,4 @@
-## On Sabayon systems the firewall is controlled by firewalld.
+## On Sabayon systems the firewall is controlled by firewalld
 
 Starting or stopping the firewall service on a Sabayon can be done with these commands:
 
@@ -10,3 +10,6 @@ To start the firewall service:
 
 To system wide disable the firewall at system boot:
   systemctl disable firewalld
+
+To check the firewall status:
+  systemctl status firewalld
