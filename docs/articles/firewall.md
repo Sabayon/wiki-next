@@ -7,10 +7,13 @@ To stop the firewall service:
     # systemctl stop firewalld
 
 To start the firewall service:
+
     # systemctl start firewalld
 
 To system wide disable the firewall at system boot:
+
     # systemctl disable firewalld
 
 To check the firewall status:
+
     # systemctl status firewalld
