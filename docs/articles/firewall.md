@@ -3,7 +3,7 @@
 Starting or stopping the firewall service on a Sabayon can be done with these commands:
 
 To stop the firewall service:
-  # systemctl stop firewalld
+    # systemctl stop firewalld
 
 To start the firewall service:
   # systemctl start firewalld
