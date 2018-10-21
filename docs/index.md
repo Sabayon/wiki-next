@@ -1,5 +1,5 @@
 
-# ![](/img/s_logo.png) Sabayon Linux Wiki
+# ![](./img/s_logo.png) Sabayon Linux Wiki
 
 Sabayon Linux is based on the source-based distro named [Gentoo](https://gentoo.org). Gentoo is a highly customizable distro and, using Gentoo's excellent development techniques, we have created a pre-configured distribution with the tenets of Performance, Versatility, and Stability. Sabayon is a rolling release, install once and stay current with entropy package manager.
 
