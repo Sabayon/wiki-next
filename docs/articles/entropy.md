@@ -3,7 +3,7 @@
 ## About
 
 
-Entropy is the name of the Sabayon Linux binary package management system. This is the name for the complete infrastructure, composed by Equo client (textual), Sulfur and Rigo client (graphical), Reagent and Activator server applications.
+Entropy is the name of the Sabayon Linux binary package management system. This is the name for the complete infrastructure, composed by Equo client (textual), Sulfur and Rigo client (graphical).
 
 Sabayon is based on Gentoo's testing branch, which is about on par with Debian Sid releases. Entropy takes packages from Gentoo testing and they are pre-compiled, then offered to you in binary form. There is a time delay from when Sabayon compiles these packages for Entropy and when you receive them. It is recommended to only use 1 of the package managers(either Entropy or Portage) to avoid any possible conflicts as a result of the time delay. Generally, Entropy packages will be slightly more stable because they will have already been released in Gentoo testing for a period of time(exact amount of time varies), prior to being released in Entropy.
 

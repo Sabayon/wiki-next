@@ -1,4 +1,4 @@
-site_name: 'Sabayon wiki'
+site_name: 'Sabayon Wiki'
 site_description: 'Documentation for Sabayon Linux'
 site_author: 'Sabayon'
 site_url: 'https://sabayon.github.io/wiki-next/'
@@ -6,17 +6,13 @@ site_url: 'https://sabayon.github.io/wiki-next/'
 repo_name: 'Sabayon/wiki-next'
 repo_url: https://github.com/Sabayon/wiki-next
 
-pages:
+nav:
 - Home: index.md
 - Contributing:
     - Wiki: articles/documentation.md
     - IRC|Testers: articles/irc.md
-- Entropy Package Manager:
-    - Entropy: articles/Entropy.md
-    - Fresh Install What to Do: articles/FreshInstall.md
-- How To Index:
-    - Networking:
-        - Web:
-            - LAMP: articles/lamp.md
+- Entropy Package Manager: articles/entropy.md
+- How To Index: articles/howto.md
 theme:
   name: 'material'
+extra_css: [extra.css]
