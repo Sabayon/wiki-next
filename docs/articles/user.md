@@ -63,5 +63,5 @@ Change it so it looks like
     ## Uncomment to allow members of group wheel to execute any command
     %wheel ALL=(ALL) ALL
 
-Save the file
+Save the file.
 
