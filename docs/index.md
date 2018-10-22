@@ -23,7 +23,7 @@ We are starting a fresh wiki and need your help with rebuilding material to help
 </style>
 <table class="tg" width="100%">
   <tr>
-    <th class="tg-0lax">- Multiple Suppported Repos</th>
+    <th class="tg-0lax">- Multiple Supported Repos</th>
     <th class="tg-0lax">- Community Repos</th>
     <th class="tg-0lax">- Personal Repos</th>    
   </tr>
