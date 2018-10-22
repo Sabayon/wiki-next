@@ -1,4 +1,4 @@
-## Add a User
+## Add a Users
 
 To create a user that is a member of the wheel, users, and audio groups.  As root:
 
