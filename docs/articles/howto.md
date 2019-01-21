@@ -18,6 +18,7 @@
 ### Software Applications
 
 ### System Operations
+* [Regenerate initramfs](initramfs.md)
 * [User Management](user.md)
 
 
