@@ -1,22 +1,25 @@
-# <span style="color:red">TEAM RED - AMD</span>
+# TEAM RED - AMD
 
-{{Note| '''SED'''
-In these instructions you'll notice the sed command. This may make some people leary as not everyone understands this command. "sed" stands for "stream editor". It can edit the edit file for you by substituting lines, words, strings, etc. In this case we are using it to remove a line in blacklist.conf and nomodeset command in grub config files.
+<pre class="clear">
+######### SED #########
+In these instructions you'll notice the sed command. This may make some people leary as not 
+everyone understands this command. "sed" stands for "stream editor". It can edit the edit file 
+for you by substituting lines, words, strings, etc. In this case we are using it to remove a 
+line in blacklist.conf and nomodeset command in grub config files.
 
-If you don't feel fully comfortable about this command. Back up your file or use nano (vi etc.) to edit the file!
-}}
-
+If you don't feel fully comfortable about this command. 
+Back up your file or use nano (vi etc.) to edit the file!
+</pre>
 
 ## EXPERIMENTAL AMDGPU w/Display Code
 
-
+<pre class="clear">
+######### Not all AMD Display Code is not mainline! #########
+This contains incomplete code that has yet not been adopted into the mainline kernel. 
+Results may vary and this may not be the same as the finalized versions of code.
+</pre>
 Be aware, this is experimental and you're on your own. This is not a supported setup. It only allows you early access to AMDGPU upgrades.
-So first you'll want to be aware you're going to be adding a couple community repositories for packages. One repository will be using -9999 packages for MESA, LIBDRM, and LLVM.
-You'll also want to be aware that you should still keep your current kernel in case anything goes wrong. That will allow you to continue booting into your system from the advanced options in GRUB by selecting the older kernel. This newer kernel and experimental packages will not be supported.
-
-{{Warning| '''Not all AMD Display Code is not mainline!'''
-This contains incomplete code that has yet not been adopted into the mainline kernel. Results may vary and this may not be the same as the finalized versions of code.
-}}
+You'll also want to be aware that you should still keep your current kernel in case anything goes wrong. That will allow you to continue booting into your system from the advanced options in GRUB by selecting the older kernel. 
 
 
 Lets get started with prep work!
@@ -36,11 +39,11 @@ localhost root # ln -s linux-5.1.0-amdgpu/ linux
 localhost root # cd linux
 </pre>
 
-Now we finish configuring and building the kernel. Now's you chance to make any other config changes you want. If you use lvm add the --lvm flag to the genkernel command.
+Now we finish configuring and building the kernel. Now's you chance to make any other config changes you want. If you use lvm or luks add the --lvm or --luks flag to the genkernel command.
 You can also double check Device Drivers -> Graphics Support -> Display Engine Configuration -> AMD DC is enabled as well as Raven family if you plan on owning an APU based on Raven.
 <pre class="clear">
 localhost root # zcat /proc/config.gz > /usr/src/config
-localhost root # genkernel --kernel-config=/usr/src/config --menuconfig --splash=sabayon --luks kernel
+localhost root # genkernel --kernel-config=/usr/src/config --menuconfig --splash=sabayon kernel
 localhost root # sabayon-dracut --rebuild-all
 localhost root # grub2-mkconfig -o /boot/grub/grub.cfg 
 </pre>
@@ -50,8 +53,7 @@ You can watch the git repo for updates/fixes/changes etc at https://cgit.freedes
 # <span style="color:green">TEAM GREEN - NVIDIA</span>
 
 ## Booting live/installer disc with vesa graphics on older GPUs
-Can't seem to get the GUI on the installer disc and seem stuck at a black screen or terminal? We've got you covered. When selecting an option from the boot screen
-edit the boot line and include the following at the end of the line. 
+Can't seem to get the GUI on the installer disc and seem stuck at a black screen or terminal? We've got you covered. When selecting an option from the boot screen edit the boot line and include the following at the end of the line. 
 <pre class="clear">
 modprobe.blacklist=nvidia xdriver=vesa
 </pre>
@@ -82,11 +84,14 @@ localhost root # equo install --ask nvidia-driver#$(uname -r) nvidia-userspace
 Will install newest driver available for currently running kernel.
 
 ### Older drivers for currently running kernel
-{{Note| '''Not supported or Guaranteed'''
-It has been noticed that depending on the old GPU or GPU drivers version, they may or may not work. This seems pretty hit and miss.
-Mobile GPUs and non-discrete GPUs (integrated in the motherboard) appear to be affected by this. If you're using an GPU older than
-Fermi or an integrated GPU, we recommend using the open source nouveau driver.
-}}
+
+<pre class="clear">
+######### Not supported or Guaranteed #########
+It has been noticed that depending on the old GPU or GPU drivers version, they may or may not work. 
+This seems pretty hit and miss.Mobile GPUs and non-discrete GPUs (integrated in the motherboard) 
+appear to be affected by this. If you're using an GPU older than Fermi or an integrated GPU, 
+we recommend using the open source nouveau driver.
+</pre>
 
 List Nvidia drivers for your current kernel (insturctions above), and install it along with corresponding '''nvidia-userspace''', e.g.:
 <pre class="clear">
