@@ -1,3 +1,5 @@
+# Enabling Debugging Symbols
+
 Packages are, by default, installed without debugging symbols in Sabayon. This saves space, specially for users that are not developers and are not interested in debugging applications. But for those of us who are developers, finding the debug symbols of Entropy packages can come in handy. To do so, change the value of the `splitdebug` variable to enable in `/etc/entropy/client.conf`
 
 <pre class="clear">
@@ -53,7 +55,7 @@ If there is no debug symbols for libpthread library, GDB will not directly say t
 warning: Unable to find libthread_db matching inferior's thread library, thread debugging will not be available.
 </pre>
 
-See this [http://bugs.sabayon.org/show_bug.cgi?id=3316 link] for more information.
+See this [http://bugs.sabayon.org/show_bug.cgi?id=3316] link for more information.
 
 #### Valgrind: Needs a non-stripped LD
 
