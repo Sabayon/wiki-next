@@ -296,8 +296,8 @@ umount /boot
 
 <pre class="clear">
 equo install syslog-ng vixie-cron
-rc-update add syslog-ng default
-rc-update add vixie-cron default
+systemctl enable syslog-ng
+systemctl enable vixie-cron
 </pre>
 
 This is just a suggestion: please go for the system logger and cron daemon of your choice!
