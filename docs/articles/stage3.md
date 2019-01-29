@@ -8,7 +8,7 @@ The first part is about installing a very basic gentoo system in a chrooted part
 
 ## Part 1: Gentoo install
 
-;Please refer to http://www.gentoo.org/doc/en/gentoo-x86-quickinstall.xml and http://www.gentoo.org/doc/en/handbook/index.xml for more in-depth details about gentoo installation.
+Please refer to http://www.gentoo.org/doc/en/gentoo-x86-quickinstall.xml and http://www.gentoo.org/doc/en/handbook/index.xml for more in-depth details about gentoo installation.
 
 ### Partitioning
 
@@ -178,26 +178,41 @@ Hopefully you can find those here: http://github.com/Sabayon/build
 
 Let's make use of them!
 
+##### fetch the bits!
 <pre class="clear">
-# fetch the bits!
 cd /opt
 git clone git://github.com/Sabayon/build.git sabayon-build
 cd /opt/sabayon-build/conf/intel/portage
-# keep your specific stuff in "myconf" branch:
+</pre>
+
+##### keep your specific stuff in "myconf" branch:
+<pre class="clear">
 git checkout -b myconf
-# symlink to your <arch>:
+</pre>
+
+##### symlink to your <arch>:
+<pre class="clear">
 ln -sf make.conf.amd64 make.conf
 ln -sf package.env.amd64 package.env
-# add & commit
+</pre>
+    
+##### add & commit:
+<pre class="clear">
 git add make.conf package.env
 git config --global user.name "Your Name"
 git config --global user.email "your@email"
 git commit
-# rename the gentoo /etc/make.conf and /etc/portage/:
+</pre>
+    
+##### rename the gentoo /etc/make.conf and /etc/portage/:
+<pre class="clear">
 cd /etc/
 mv portage portage-gentoo
 mv make.conf make.conf-gentoo
+</pre>
+    
 # symlink to sabayon /etc/make.conf /etc/portage/:
+<pre class="clear">
 ln -sf /opt/sabayon-build/conf/intel/portage portage
 </pre>
 
@@ -264,9 +279,10 @@ nano -w /etc/default/sabayon-grub
 </pre>
 
 /etc/default/sabayon-grub example:
-<pre>
+<pre class="clear">
 GRUB_CMDLINE_LINUX="<boot options specific to your system… root=... dolvm crypt real_root etc…> console=tty1 splash=silent,theme:sabayon quiet"
 </pre>
+
 Put boot options according to your system. It should at least be able to mount your rootfs (/).
 
 Run grub2-mkconfig to generate /boot/grub/grub.cfg
