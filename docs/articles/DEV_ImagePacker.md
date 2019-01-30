@@ -1,6 +1,6 @@
-= Building VMware images =
+# Building VMware images
 
-== Setting up a build environment using VMware Player ==
+## Setting up a build environment using VMware Player
 
 While we'll be installing the VMware Workstation in these instructions which is not free software, we only need the player and VIX components which are free to use so there's no need to purchase a workstation license.
 
@@ -26,7 +26,7 @@ answer VNET_8_VIRTUAL_ADAPTER yes
 * Get the vmware prerequisites running (kernel modules loaded, networks enabled) <br />`# systemctl enable --now vmware.target`
 * Clone a copy of https://github.com/Sabayon/packer-templates
 
-== Building the image ==
+## Building the image
 
 * Run the packer command to complete the install <br /> `packer build -var "flavor=SpinBase" -var "vagrant=vagrant" -only vmware-iso images.json`
 * Packer produces a .tar.gz of a vmx directory. In order to import this into ESX, it needs to be converted into an OVA.
