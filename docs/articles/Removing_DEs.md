@@ -3,7 +3,7 @@
 Before removing a Desktop Environment like KDE, you have to keep a few things in mind;
 * it will remove tons and tons of stuff, probably more than you want to be removed.
 * Removing too much might leave your system unusable.
-* Be sure to have an alternative DM installed. (gdm or lxdm or lightdm)
+* Be sure to have an alternative DM installed. (gdm or lightdm)
 That said, unless you are running out of hard drive space or have limited bandwidth for updates,there is no real harm in having kde installed. If you don't use it, it won't hinder performance.
 
 ## Preparation
@@ -17,15 +17,6 @@ install your alternative Desktop Environment:
 from Rigo: enter:***xfce4-meta*** in the searchbox, select the package, and click install,
 
 or install directly using a shortcut in the searchbox: ***do:install xfce4-meta*** accept the licence agreement.
-install a alternative LoginManager: (in this case, i choose lxdm)
-<pre class="clear">#   equo install lxdm</pre>
-while at the terminal, change the default LoginManager to ***lxdm***:
-<pre class="clear">#   nano -w /etc/conf.d/xdm</pre>
-and replace:
-<pre class="clear">DISPLAYMANAGER="kdm"</pre>
-with:
-<pre class="clear">DISPLAYMANAGER="lxdm"</pre>
-When done, save: [CTRL-O] and close: [CTRL-X]
 logoff, and logon again into the fresh installed Environment. (NOT KDE)
 
 ## Removing KDE
@@ -34,7 +25,8 @@ open your favourite terminal, and become root.
 enter following in the terminal:
 <pre class="clear">equo remove kdelibs --ask --deep</pre>
 check the package list before proceeding.
-### NOTICE It might very well be possible, that Entropy wants to remove vital packages for XFCE as well.,
+### NOTICE 
+It might very well be possible, that Entropy wants to remove vital packages for XFCE as well.,
 
 so chances are that after a reboot the system is unusable.
 
@@ -56,7 +48,7 @@ and ***.kderc***:
 such as Gnome, you have to keep a few things in mind:
 * Many libraries are shared with other DE's, so you don't want them to be removed.
 * Removing too much might leave your system unusable.
-* Be sure to have an alternative DM installed. (lxdm or lightdm)
+* Be sure to have an alternative DM installed. (lightdm)
 
 That said, unless you are running out of hard drive space or have limited bandwidth for updates,
 There is no real harm in having Gnome installed. If you don't use it, it won't hinder performance.
@@ -119,7 +111,7 @@ Now we need to check for possible broken dependencies and libraries that may pul
 ### NOTICE
 Before removing a Desktop Environment, you have to keep a few things in mind;
 * Removing too much might leave your system unusable.
-* Be sure to have an alternative DM installed. (gdm or lxdm or lightdm)
+* Be sure to have an alternative DM installed. (gdm or lightdm)
 That said, unless you are running out of hard drive space or have limited bandwidth for updates,
 
 there is no real harm in having Mate installed. If you don't use it, it won't hinder performance.
@@ -159,7 +151,7 @@ When done, a final step, enter ***equo conf update*** to check if configuration 
 ### NOTICE
 Before removing a Desktop Environment like XFCE, you have to keep a few things in mind;
 * Removing too much might leave your system unusable.
-* Be sure to have an alternative DM installed. (gdm or lxdm or lightdm)
+* Be sure to have an alternative DM installed. (gdm or lightdm)
 That said, unless you are running out of hard drive space or have limited bandwidth for updates,
 
 there is no real harm in having XFCE installed. If you don't use it, it won't hinder performance.
