@@ -8,7 +8,7 @@
 
 ##  Installing
 
-It is available on Entropy (see [//packages.sabayon.org/quicksearch?q=app-misc%2Fsabayon-devkit app-misc/sabayon-devkit], and [http://gpo.zugaina.org/app-misc/sabayon-devkit gpo.zugaina.org] for portage), but you can install on well on other distros from the sources(https://github.com/Sabayon/devkit), the tools leverage Docker and does not modify your running system.
+It is available on Entropy (see [http://packages.sabayon.org/quicksearch?q=app-misc%2Fsabayon-devkit app-misc/sabayon-devkit], and [http://gpo.zugaina.org/app-misc/sabayon-devkit gpo.zugaina.org] for portage), but you can install on well on other distros from the sources(https://github.com/Sabayon/devkit), the tools leverage Docker and does not modify your running system.
 
 From the terminal of your Sabayon box:
 
