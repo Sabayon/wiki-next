@@ -1,77 +1,66 @@
-# SSH Single SignOn (SSO)
+# SCR - Community Repositories 
 
-## Concept
-If you work with multiple *nix-based machines via ssh, you are probably tired of constantly having to enter your password every time you want to access another box.  There is a secure way to allow you to access every machine, that you have ssh access to, without having to enter another password (other than the one you signed on with originally.)
+## Package Requests
 
-This is actually quite simple to do, you basically just create a public/private key pair to authenticate yourself to your other machines, then have PAM spawn an agent to load your keys after you logon, providing a single signon solution to accessing all your remote machines.  This guide will walk you through setting this up.
+If you are not familiar with the infrastructure and how to make a Pull Request to get a package inside the community repositories, open a bug request [https://bugs.sabayon.org/enter_bug.cgi?product=Community%20Repositories]
 
+## Setup a local testing environment
 
-## Equo Stuff
-First of all, we are going to need the pam_ssh module.  You may already have this installed, if not equo it.  I'm going to assume you already have openssh installed, as every system should.
-<pre class="clear"># equo install pam_ssh </pre>
-
-## Create Key Pair
-Now we need to create the key pair to authenticate yourself across the network.  To do so, run this as your **regular user**.
-***WARNING: This should NOT be done as root, and you should never, ever ssh using the root account***
-<pre class="clear">$ ssh-keygen -t dsa </pre>
-
-This will ask where to save the file, just press enter as the default is what we want.  
-
-After that it will ask for the passphrase you want to use.  It is important to ***set the passphrase to the exact same password as your normal logon password*** for this user.  This is the password for the user on the current machine, not the one for other machines, even if they differ.
-
-When that is done, two files should of been created `~/.ssh/id_dsa` and `~/.ssh/id_dsa.pub` .  
-***NOTE: It is very important to keep `~/.ssh/id_dsa private`, it should be only readable by your user, to make sure of this, run this command:***
-<pre class="clear">$ chmod 600 ~/.ssh/id_dsa </pre>
-
-## Distribute Public Key
-Now we need to give all of our remote machines our public key so we can use it to authenticate.  This is very simple to do, run the following command as your user for each remote system you want to setup the passwordless authentication for.
-<pre class="clear">$ ssh-copy-id -i ~/.ssh/id_dsa.pub username@remotehostname </pre>
-
-## Configure PAM
-We need to tell PAM to use our logon password to spawn an ssh-agent and load the rsa key we just made.  There are two lines for `pam_ssh.so` we need to add, so your system-auth should look something like this:
-`/etc/pam.d/system-auth`
+* Install vagrant-bin and virtualbox
 <pre class="clear">
-auth       required     pam_env.so
-# Add this line here
-auth       sufficient   pam_ssh.so
-
-auth       sufficient   pam_unix.so try_first_pass likeauth nullok
-auth       required     pam_deny.so
-
-account    required     pam_unix.so
-
-password   required     pam_cracklib.so difok=2 minlen=8 dcredit=2 ocredit=2 try_first_pass retry=3
-password   sufficient   pam_unix.so try_first_pass use_authtok nullok md5 shadow
-password   required     pam_deny.so
-
-session    required     pam_limits.so
-session    required     pam_unix.so
-# Add this line to the end
-session    optional     pam_ssh.so
+  equo install app-emulations/vagrant app-emulation/virtualbox-bin app-emulation/virtualbox-modules
 </pre>
 
-## Summary
-That's all we need to do, you should be able to logout and log back in with the ability to ssh to your remote hosts without a password. You may need to restart your login manager with `systemctl restart lightdm` or simply reboot.
+* Clone a copy of https://github.com/Sabayon/community-buildspec into a local directory and cd into it
+* Startup the SCR vagrant VM
 
-***WARNING: This WILL remove some aspect of physical security on whatever machine you set this up on.  If physical security is a concern, please use a locking screensaver or logout whenever you leave your system unattended.  This is something you should do anyway to protect your local machine from malicious passersby***
-
-## Troubleshooting
-If you are having problems creating or distributing your keys, take a look at 
-http://gentoo-wiki.com/SECURITY_SSH_without_a_password for more information on that task.
-
-If you are still prompted for a password after completing this guide, there are a few files that you may need to check.  Make sure both of these entries are set to "yes" on your remote hosts. 
-`/etc/ssh/sshd_config`
 <pre class="clear">
-# Allow Identity Auth for SSH1?
- RSAAuthentication yes
- 
- # Allow Identity Auth for SSH2?
- PubkeyAuthentication yes
+  vagrant plugin install vagrant-persistent-storage
+  vagrant up
 </pre>
 
-Make sure these entries are in your local machine's config.
-`/etc/ssh/sshd_config`
-<pre class="clear">Host * 
-Port 22
-IdentityFile ~/.ssh/id_dsa
+* Fork a copy of https://github.com/Sabayon/community-repositories in Github.
+* The provisioning script checks out a copy into ./repositories inside your community-buildspec working copy. Update the origin remote URL to point at your own github fork 
+
+<pre class="clear">
+  cd repositories
+  git remote set-url origin git@github.com:${your_github_username}/community-repositories.git
+</pre>
+
+* Make any changes to the repository config files you wish, e.g. adding a new package
+* Run a test build of the repository on your own machine
+
+<pre class="clear">
+  vagrant ssh
+  sudo su -
+  cd /vagrant/repositories/${repo_you_want_to_build}/
+  ../test.sh
+</pre>
+
+* Watch the output to see if it builds successfully
+* Raise a pull request against https://github.com/Sabayon/community-repositories to have your changes considered for inclusion into the SCR
+
+## Clean up caches
+
+### Docker images
+
+List current images:
+<pre class="clear">
+ sabayon ~ # docker images
+ REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
+ sabayon/builder-amd64-sihnon-common   latest              de101af3e5f0        4 minutes ago       7.919 GB
+ <none>                                <none>              5d6b6223c3c6        47 minutes ago      6.747 GB
+ sabayon/builder-amd64-sihnon-server   latest              6950337b5b61        2 days ago          8.17 GB
+ <none>                                <none>              56c4b5cbccb2        2 days ago          6.486 GB
+ sabayon/builder-amd64                 latest              023fbad8416f        2 days ago          3.535 GB
+ sabayon/eit-amd64                     latest              fa07f471556f        2 days ago          1.701 GB
+</pre>
+Delete an image:
+<pre class="clear">
+ sabayon ~ # docker rmi -f sabayon/builder-amd64-sihnon-common
+ Untagged: sabayon/builder-amd64-sihnon-common:latest
+ Deleted: sha256:de101af3e5f0b75e38133e88aefb51f337573f2872d8c5fd334cc7333109a543
+ Deleted: sha256:af2c266c622af79f5c7cd84ba96a78f5bfde1d2c593d5ba43f70c576ab0b1680
+ Deleted: sha256:e75ef42c43ab2296ca96bb798f73e8fe2516b215fbe747a5c3b67148c4445c97
+ Deleted: sha256:57835ffc466aec7f36b932d848419b570f6fc0d1ddc392570e63ed2b3a2c9478
 </pre>
