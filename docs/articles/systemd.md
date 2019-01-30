@@ -1,6 +1,6 @@
 # Systemd Guide
 
-`systemd` is a *System and Service Manager for Linux, compatible with SysV and LSB init scripts.
+`systemd` is a **System and Service Manager for Linux**, compatible with SysV and LSB init scripts.
 systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services,
 offers on-demand starting of daemons, keeps track of processes using Linux control groups,
 supports snapshotting and restoring of the system state, maintains mount and automount points
@@ -14,22 +14,13 @@ and implements an elaborate transactional dependency-based service control logic
 ### Verifying Bootup
 As many of you know, systemd is the new init system.
 
-Traditionally, when booting up a Linux system, you see a lot of little messages passing by on your screen, if they are shown at all, 
+Traditionally, when booting up a Linux system, you see a lot of little messages passing by on your screen, if they are shown at all, given we use graphical boot splash technology like Plymouth these days. 
 
-given we use graphical boot splash technology like Plymouth these days. 
-
-Nonetheless the information of the boot screens was and still is very relevant, because it shows you for each service that is being started 
-
-as part of bootup, whether it managed to start up successfully or failed (with those green or red [ OK ] or [ FAILED ] indicators).
+Nonetheless the information of the boot screens was and still is very relevant, because it shows you for each service that is being started as part of bootup, whether it managed to start up successfully or failed (with those green or red [ OK ] or [ FAILED ] indicators).
 
 
-systemd has feature that tracks and remembers for each service whether it started up successfully, 
+systemd has feature that tracks and remembers for each service whether it started up successfully, whether it exited with a non-zero exit code, whether it timed out, or whether it terminated abnormally (by segfaulting or similar), both during start-up and runtime.  By simply typing systemctl in your shell you can query the state of all services, both systemd native and SysV/LSB services:
 
-whether it exited with a non-zero exit code, whether it timed out, or whether it terminated abnormally (by segfaulting or similar), 
-
-both during start-up and runtime.  By simply typing systemctl in your shell you can query the state of all services, 
-
-both systemd native and SysV/LSB services:
 <pre class="clear">
  # root @ 15:51:25 ] bwg-inc # ]¬ systemctl
  # UNIT                        LOAD   ACTIVE SUB       DESCRIPTION
@@ -42,19 +33,15 @@ both systemd native and SysV/LSB services:
  # home2.mount                 loaded active mounted   /home2
  # tmp.mount                   loaded active mounted   /tmp
  # ntpd.service                loaded maintenance  maintenance    Network Time Service 
- # LOAD   # Reflects whether the unit definition was properly loaded.
- # ACTIVE # The high-level unit activation state, i.e. generalization of SUB.
- # SUB    # The low-level unit activation state, values depend on unit type.
+ # LOAD   = Reflects whether the unit definition was properly loaded.
+ # ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+ # SUB    = The low-level unit activation state, values depend on unit type.
  #
  # 99 loaded units listed. Pass --all to see loaded but inactive units, too.
  # To show all installed unit files use 'systemctl list-unit-files'.
 </pre>
 
-Look at the ACTIVE column, which shows you the high-level state of a service, whether it is active (i.e. running), 
-
-inactive (i.e. not running) or in any other state.   If you look closely you'll see one item in the list that is marked maintenance 
-
-and highlighted in red. This informs you about a service that failed to run or otherwise encountered a problem. 
+Look at the ACTIVE column, which shows you the high-level state of a service, whether it is active (i.e. running), inactive (i.e. not running) or in any other state.   If you look closely you'll see one item in the list that is marked maintenance and highlighted in red. This informs you about a service that failed to run or otherwise encountered a problem. 
 
 In this case this is ntpd. Now, let's find out what actually happened to ntpd, with the systemctl status command:
 <pre class="clear">
@@ -63,12 +50,13 @@ In this case this is ntpd. Now, let's find out what actually happened to ntpd, w
  #	  Loaded: loaded (/etc/systemd/system/ntpd.service)
  #	  Active: maintenance
  # 	    Main: 953 (code#exited, status#255)
- # 	  CGroup: name#systemd:/systemd-1/ntpd.service
+ # 	  CGroup: name=systemd:/systemd-1/ntpd.service
 </pre>
 
 This shows us that NTP terminated during runtime (when it ran as PID 953), and tells us exactly the error condition: 
-
+<pre class="clear">
  the process exited with an exit status of 255.
+</pre>
 
 ### Killing Services
 Killing a system daemon is easy, right? Or is it?
@@ -81,67 +69,58 @@ But here comes systemd to the rescue: With 'systemctl kill' you can easily send 
 <pre class="clear">
  # systemctl kill crond.service
 </pre>
+
 This will ensure that SIGTERM is delivered to all processes of the crond service, not just the main process.
 
 Of course, you can also send a different signal if you wish. For example, if you are bad-ass you might want to go for SIGKILL right-away:
 <pre class="clear">
  # systemctl kill -s SIGKILL crond.service
 </pre>
-And there you go, the service will be brutally slaughtered in its entirety, regardless how many times it forked, 
-
-whether it tried to escape supervision by double forking or fork bombing.
+And there you go, the service will be brutally slaughtered in its entirety, regardless how many times it forked, whether it tried to escape supervision by double forking or fork bombing.
 
 
 Sometimes all you need is to send a specific signal to the main process of a service, maybe because you want to trigger a reload via SIGHUP. 
 
 Instead of going via the PID file, here's an easier way to do this:
 <pre class="clear">
- # systemctl kill -s HUP --kill-who#main crond.service
+ # systemctl kill -s HUP --kill-who=main crond.service
 </pre>
-How does this relate to systemctl stop? kill goes directly and sends a signal to every process in the group, 
 
-however stop goes through the official configured way to shut down a service, i.e. invokes the stop command configured with `ExecStop#` in the service file. Usually stop should be sufficient. kill is the tougher version.
+How does this relate to systemctl stop? kill goes directly and sends a signal to every process in the group, however stop goes through the official configured way to shut down a service, i.e. invokes the stop command configured with `ExecStop=` in the service file. Usually stop should be sufficient. kill is the tougher version.
 
 
 ### stop, disable, or mask a service...   The Three Levels of "Off"
 In systemd, there are three levels of turning off a service (or other unit). Let's have a look which those are:
 
-1, You can stop a service. That simply terminates the running instance of the service and does little else.:
+1. You can stop a service. That simply terminates the running instance of the service and does little else.:
 <pre class="clear">
  # systemctl stop ntpd.service
 </pre>
 
-2, You can disable a service. This unhooks a service from its activation triggers. That means, that depending on your service 
-
-it will no longer be activated on boot, by socket or bus activation or by hardware plug (or any other trigger that applies to it). 
+2. You can disable a service. This unhooks a service from its activation triggers. That means, that depending on your service it will no longer be activated on boot, by socket or bus activation or by hardware plug (or any other trigger that applies to it). 
 
 However, you can still start it manually if you wish. If there is already a started instance disabling a service will not have the effect of stopping it. :
 <pre class="clear">
  # systemctl disable ntpd.service
 </pre>
+
 Disabling a service is a permanent change; until you undo it it will be kept, even across reboots.
 
-
-3, You can mask a service. This is like disabling a service, but on steroids. It not only makes sure that service is not started automatically
-
-anymore, but even ensures that a service cannot even be started manually anymore. This is a bit of a hidden feature in systemd, 
+3. You can mask a service. This is like disabling a service, but on steroids. It not only makes sure that service is not started automatically anymore, but even ensures that a service cannot even be started manually anymore. This is a bit of a hidden feature in systemd, 
 
 since it is not commonly useful and might be confusing the user. But here's how you do it:
 <pre class="clear">
  # systemctl mask ntpd.service
  # ln -s /dev/null /etc/systemd/system/ntpd.service
 </pre>
-By symlinking a service file to /dev/null you tell systemd to never start the service in question and completely block its execution. 
+
+By symlinking a service file to `/dev/null` you tell systemd to never start the service in question and completely block its execution. 
 
 Unit files stored in `/etc/systemd/system` override those from `/usr/lib/systemd/system` that carry the same name. 
 
-The former directory is administrator territory, the latter terroritory of your package manager. By installing your symlink 
+The former directory is administrator territory, the latter terroritory of your package manager. By installing your symlink in `/etc/systemd/system/ntpd.service` you make sure that systemd will never read the upstream shipped service file `/usr/lib/systemd/system/ntpd.service`.
 
-in `/etc/systemd/system/ntpd.service` you make sure that systemd will never read the upstream shipped service file 
-
-`/usr/lib/systemd/system/ntpd.service`.
-
-## advanced
+## Processes and Common Admin Tools
 
 ### Which Service Owns Which Processes?
 In systemd every process that is spawned is placed in a control group named after its service.
@@ -150,11 +129,9 @@ Control groups (or cgroups) are simply groups of processes that can be arranged 
 
 When processes spawn other processes, these children-processes are automatically made members of the parents cgroup.
 
-Cgroups can be used as an effective way to label processes after the service they belong to and be sure that the service cannot escape 
+Cgroups can be used as an effective way to label processes after the service they belong to and be sure that the service cannot escape from the label, Regardless how often it forks or renames itself. 
 
-from the label, Regardless how often it forks or renames itself. 
-
-Here i discuss two commands you may use to relate systemd services and processes.   "ps"  and "systemd-cgls"
+Here i discuss two commands you may use to relate systemd services and processes. `ps`  and `systemd-cgls`
 
 ### ps
 <pre class="clear">
@@ -164,24 +141,24 @@ Here i discuss two commands you may use to relate systemd services and processes
  #   272 root     4:cpuacct,cpu:/system/atd.s /usr/sbin/atd -f
  #   273 root     4:cpuacct,cpu:/system/kdm.s /usr/bin/kdm vt1
  #   281 root     4:cpuacct,cpu:/system/kdm.s  \_ /usr/bin/X :0 vt2 -background none -nolisten tcp -seat seat0 -auth /var/run/kdm/A:0-DZRMfb
- #   287 root     2:name#systemd:/user/1000.u  \_ -:0             
- #   351 apostee+ 2:name#systemd:/user/1000.u      \_ awesome
- #   376 apostee+ 2:name#systemd:/user/1000.u          \_ /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "awesome"
+ #   287 root     2:name=systemd:/user/1000.u  \_ -:0             
+ #   351 apostee+ 2:name=systemd:/user/1000.u      \_ awesome
+ #   376 apostee+ 2:name=systemd:/user/1000.u          \_ /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "awesome"
  #   296 polkitd  4:cpuacct,cpu:/system/polki /usr/lib/polkit-1/polkitd --no-debug
  #   311 root     4:cpuacct,cpu:/system/dbus. /usr/sbin/modem-manager
  #   316 root     4:cpuacct,cpu:/system/bluet /usr/sbin/bluetoothd -n
  #   326 rpc      4:cpuacct,cpu:/system/rpcbi /sbin/rpcbind -w 
  #   339 root     4:cpuacct,cpu:/system/wpa_s /usr/sbin/wpa_supplicant -u -f /var/log/wpa_supplicant.log -c /etc/wpa_supplicant/wpa_supplicant.
- #   365 apostee+ 2:name#systemd:/user/1000.u dbus-launch --sh-syntax --exit-with-session
- #   366 apostee+ 2:name#systemd:/user/1000.u /bin/dbus-daemon --fork --print-pid 4 --print-address 6 --session
- #   422 apostee+ 2:name#systemd:/user/1000.u xscreensaver
- #   424 apostee+ 2:name#systemd:/user/1000.u conky
+ #   365 apostee+ 2:name=systemd:/user/1000.u dbus-launch --sh-syntax --exit-with-session
+ #   366 apostee+ 2:name=systemd:/user/1000.u /bin/dbus-daemon --fork --print-pid 4 --print-address 6 --session
+ #   422 apostee+ 2:name=systemd:/user/1000.u xscreensaver
+ #   424 apostee+ 2:name=systemd:/user/1000.u conky
 </pre>
 In the third column you see the cgroup systemd assigned to each process.
 
 If you want, you can set the shell alias psc (~/,bashrc) to the ps command line shown above:
 <pre class="clear">
- # alias psc#'ps xawf -eo pid,user,cgroup,args'
+ # alias psc='ps xawf -eo pid,user,cgroup,args'
 </pre>
 
 ### systemd-cgls
@@ -225,7 +202,6 @@ If you look closely you will notice that a number of processes have been assigne
 systemd does not only maintains services in cgroups, but user session processes as well.
 
 # journalctl usage
-## the basics
 
 let's start with some basics. To access the logs of the journal use the journalctl tool. 
 
@@ -234,11 +210,7 @@ To have a first look at the logs, just type in:
  # journalctl
 </pre>
 
-If you run this as root you will see all logs generated on the system, from system components the same way 
-
-as for logged in users.  The output you will get looks like a pixel-perfect copy of the traditional /var/log/messages format, 
-
-but actually has a couple of improvements over it:
+If you run this as root you will see all logs generated on the system, from system components the same way as for logged in users.  The output you will get looks like a pixel-perfect copy of the traditional `/var/log/messages` format, but actually has a couple of improvements over it:
 
 * Lines of error priority (and higher) will be highlighted red.
 * Lines of notice/warning priority will be highlighted bold.
@@ -268,14 +240,12 @@ After logging out and back in as yourusername you have access to the full journa
 
 If invoked without parameters journalctl will show you the current log database. 
 
-Sometimes one needs to watch logs as they grow, where one previously used tail -f /var/log/messages:
+Sometimes one needs to watch logs as they grow, where one previously used `tail -f /var/log/messages`:
 <pre class="clear">
  $ journalctl -f
 </pre>
 
-Yes, this does exactly what you expect it to do: it will show you the last ten logs lines, 
-
-and then wait for changes and show them as they take place.
+Yes, this does exactly what you expect it to do: it will show you the last ten logs lines, and then wait for changes and show them as they take place.
 
 
 ### Basic Filtering
@@ -291,9 +261,7 @@ This will show you only the logs of the current boot, with all the gimmicks ment
 
 But sometimes even this is way too much data to process.
 
-So let's just listing all the real issues to care about: all messages of priority levels ERRORS and worse, 
-
-from the current boot:
+So let's just listing all the real issues to care about: all messages of priority levels ERRORS and worse, from the current boot:
 <pre class="clear">
  $ journalctl -b -p err
 </pre>
@@ -304,9 +272,7 @@ But, if you reboot only seldom the -b makes little sense, filtering based on tim
 </pre>
 And there you go, all log messages from the day before at 00:00 in the morning until right now. Awesome!
 
-Of course, we can combine this with -p err or a similar match. But suppose, we are looking for something that happened on the 
-
-15th of October, or was it the 16th?
+Of course, we can combine this with -p err or a similar match. But suppose, we are looking for something that happened on the 15th of October, or was it the 16th?
 <pre class="clear">
  $ journalctl --since#2012-10-15 --until#"2011-10-16 23:59:59"
 </pre>
@@ -337,10 +303,9 @@ As you can see here with the given examples, Journalctl is a pretty advanced too
 
 But we're not done yet. Journalctl has some more to offer, which will be showed in the section Advanced Usage.
 
-## Advanced
+## Advanced Administration
 ### Disable Paging
-You can change and disable paging using the $SYSTEMD_PAGER environment variable. You may end up with truncated lines, if you set it to "" or "cat" as 
-suggested in the manual. Try this:
+You can change and disable paging using the `$SYSTEMD_PAGER` environment variable. You may end up with truncated lines, if you set it to "" or `cat` as suggested in the manual. Try this:
 <pre class="clear">
  export SYSTEMD_PAGER#"cat|cat"
 </pre>
@@ -359,25 +324,25 @@ The data will be there, and wait to be used by you. Let's see how this looks:
 <pre class="clear">
  $ journalctl -o verbose -n
  $ Fri, 2013-11-01 19:22:34 CET [s#ac9e9c423355411d87bf0ba1a9b424e8;i#4301;b#5335e9cf5d954633bb99aefc0ec38c25;m#882ee28d2;t#4ccc0f98326e6;x#f21e8b1b0994d7ee]
-        PRIORITY#6
-        SYSLOG_FACILITY#3
-        _MACHINE_ID#a91663387a90b89f185d4e860000001a
-        _HOSTNAME#epsilon
-        _TRANSPORT#syslog
-        SYSLOG_IDENTIFIER#avahi-daemon
-        _COMM#avahi-daemon
-        _EXE#/usr/sbin/avahi-daemon
-        _SYSTEMD_CGROUP#/system/avahi-daemon.service
-        _SYSTEMD_UNIT#avahi-daemon.service
-        _SELINUX_CONTEXT#system_u:system_r:avahi_t:s0
-        _UID#70
-        _GID#70
-        _CMDLINE#avahi-daemon: registering [epsilon.local]
-        MESSAGE#Joining mDNS multicast group on interface wlan0.IPv4 with address 172.31.0.53.
-        _BOOT_ID#5335e9cf5d954633bb99aefc0ec38c25
-        _PID#27937
-        SYSLOG_PID#27937
-        _SOURCE_REALTIME_TIMESTAMP#1351029098747042
+        PRIORITY=6
+        SYSLOG_FACILITY=3
+        _MACHINE_ID=a91663387a90b89f185d4e860000001a
+        _HOSTNAME=epsilon
+        _TRANSPORT=syslog
+        SYSLOG_IDENTIFIER=avahi-daemon
+        _COMM=avahi-daemon
+        _EXE=/usr/sbin/avahi-daemon
+        _SYSTEMD_CGROUP=/system/avahi-daemon.service
+        _SYSTEMD_UNIT=avahi-daemon.service
+        _SELINUX_CONTEXT=system_u:system_r:avahi_t:s0
+        _UID=70
+        _GID=70
+        _CMDLINE=avahi-daemon: registering [epsilon.local]
+        MESSAGE=Joining mDNS multicast group on interface wlan0.IPv4 with address 172.31.0.53.
+        _BOOT_ID=5335e9cf5d954633bb99aefc0ec38c25
+        _PID=27937
+        SYSLOG_PID=27937
+        _SOURCE_REALTIME_TIMESTAMP=1351029098747042
 </pre>
 
 (I cut out a lot here, I don't want to make this story overly long. Without the -n parameter it shows you the last 10 log entries, but I cut out all but the last.)
@@ -390,14 +355,14 @@ we now see all the details the journal has about each entry, but it's highly int
 
 Now, as it turns out the journal database is indexed by all of these fields, out-of-the-box! Let's try this out:
 <pre class="clear">
- $ journalctl _UID#70
+ $ journalctl _UID=70
 </pre>
 
 And there you go, this will show all log messages logged from Linux user ID 70. 
 
 As it turns out you can easily combine these matches:
 <pre class="clear">
- $ journalctl _UID#70 _UID#71
+ $ journalctl _UID=70 _UID=71
 </pre>
 
 Specifying two matches for the same field will result in a logical OR combination of the matches. 
@@ -409,12 +374,12 @@ If you specify two matches for different field names, they will be combined with
 
 All entries matching both will be shown now, meaning that all messages from processes named avahi-daemon and host bwg-inc.
 <pre class="clear">
- $ journalctl _HOSTNAME#bwg-inc _COMM#avahi-daemon
+ $ journalctl _HOSTNAME=bwg-inc _COMM=avahi-daemon
 </pre>
 
 But of course, that's not fancy enough for us. We must go deeper:
 <pre class="clear">
- $ journalctl _HOSTNAME#bwg-inc _UID#70 + _HOSTNAME#epsilon _COMM#avahi-daemon
+ $ journalctl _HOSTNAME=bwg-inc _UID=70 + _HOSTNAME#epsilon _COMM=avahi-daemon
 </pre>
 
 The + is an explicit OR you can use in addition to the implied OR when you match the same field twice. 
@@ -437,13 +402,9 @@ the names of all systemd services which ever logged into the journal. This makes
 
 # Systemd Timers
 
-systemd is capable of taking on a significant subset of the functionality of Cron through 
+systemd is capable of taking on a significant subset of the functionality of Cron through built-in support for calendar time events as well as monotonic time events.
 
-built-in support for calendar time events as well as monotonic time events.
-
-While we previously used Cron, systemd also provides a good structure to set up Cron-
-
-scheduling. 
+While we previously used Cron, systemd also provides a good structure to set up Cron-scheduling. 
 
 ## Running a single script
 Let’s say you have a script `/usr/local/bin/myscript` that you want to run every hour.
@@ -457,11 +418,11 @@ First, create a service file, and put it in `/etc/systemd/system/`
 with the following content:
 <pre class="clear">
 [Unit]
-Description#MyScript
+Description=MyScript
 
 [Service]
-Type#simple
-ExecStart#/usr/local/bin/myscript
+Type=simple
+ExecStart=/usr/local/bin/myscript
 </pre>
 
 Note that it is important to set the Type variable to be “simple”, not “oneshot”. 
@@ -470,7 +431,7 @@ Using “oneshot” makes it so that the script will be run the first time, and 
 
 thinks that you don’t want to run it again, and will turn off the timer we make next.
 
-* *timer file*
+* **timer file**
 Next, create a timer file, and put it also in the same directory as the service file above.
 <pre class="clear">
  # nano -w /etc/systemd/system/myscript.timer
@@ -479,21 +440,21 @@ Next, create a timer file, and put it also in the same directory as the service 
 with the following content:
 <pre class="clear">
 [Unit]
-Description#Runs myscript every hour
+Description=Runs myscript every hour
 
 [Timer]
 # Time to wait after booting before we run first time
-OnBootSec#10min
+OnBootSec=10min
 # Time between running each consecutive time
-OnUnitActiveSec#1h
-Unit#myscript.service
+OnUnitActiveSec=1h
+Unit=myscript.service
 
 [Install]
-WantedBy#multi-user.target
+WantedBy=multi-user.target
 </pre>
 
 
-* *enable/start
+* **enable/start**
 Rather than starting / enabling the service file, you use the timer.
 <pre class="clear">
  # systemctl start myscript.timer
@@ -509,27 +470,25 @@ Now let’s say there are a bunch of scripts you want to run, all at the same ti
 
 In this case, you will want make a couple changes on the above formula.
 
-* *service files*
-Create the service files to run your scripts as showed previously, 
-
-but include the following section at the end of each service file:
+* **service files**
+Create the service files to run your scripts as showed previously, but include the following section at the end of each service file:
 <pre class="clear">
 [Install]
-WantedBy#mytimer.target
+WantedBy=mytimer.target
 </pre>
 
 If there is any ordering dependency in your service files, be sure you specify it with 
 
-the *After#something.service* and/or *Before#whatever.service* parameters within the 
+the *After=something.service* and/or *Before=whatever.service* parameters within the 
 
 Description section.
 
 
-* *timer file*
+* **timer file**
 You only need a single timer file. Create mytimer.timer, as outlined above.
 
 
-* *target file*
+* **target file**
 You can create the target that all these scripts depend upon.,
 <pre class="clear">
  # nano -w /etc/systemd/system/mytimer.target
@@ -538,15 +497,15 @@ You can create the target that all these scripts depend upon.,
 with the following content:
 <pre class="clear">
 [Unit]
-Description#Mytimer
+Description=Mytimer
 # Lots more stuff could go here, but it's situational.
 # Look at systemd.unit man page.
 </pre>
 
 
-* *enable/start*
+* **enable/start**
 You need to enable each of the service files, as well as the timer:
-<pre class#"clear">
+<pre class="clear">
 systemctl enable script1.service
 systemctl enable script2.service
 ...
@@ -556,11 +515,7 @@ systemctl start mytimer.service
 
 ## Hourly, daily and weekly events
 
-One strategy which can be used for creating this functionality is through timers 
-
-which call in targets. All services which need to be run hourly can be called in as dependencies 
-
-of these targets. 
+One strategy which can be used for creating this functionality is through timers which call in targets. All services which need to be run hourly can be called in as dependencies of these targets. 
 
 First, the creation of a few directories is required:
 <pre class="clear">
@@ -569,7 +524,7 @@ First, the creation of a few directories is required:
 
 The following files will need to be created in the paths specified in order for this to work.
 
-* *hourly events
+* **hourly events**
 <pre class="clear">
  # nano -w /etc/systemd/system/timer-hourly.timer
  </pre>
@@ -600,7 +555,7 @@ StopWhenUnneeded=yes
 
 
 
-* *daily events*
+* **daily events**
 <pre class="clear">
  # nano -w /etc/systemd/system/timer-daily.timer
 </pre>
@@ -608,7 +563,7 @@ StopWhenUnneeded=yes
 content:
 <pre class="clear">
 [Unit]
-Description#Daily Timer
+Description=Daily Timer
 
 [Timer]
 OnBootSec=10min
@@ -632,7 +587,7 @@ StopWhenUnneeded=yes
 
 
 
-* *weekly events*
+* **weekly events**
 <pre class="clear">
  # nano -w /etc/systemd/system/timer-weekly.timer
 </pre>
@@ -645,10 +600,10 @@ Description=Weekly Timer
 [Timer]
 OnBootSec=15min
 OnUnitActiveSec=1w
-Unit#timer-weekly.target
+Unit=timer-weekly.target
 
 [Install]
-WantedBy#basic.target
+WantedBy=basic.target
 </pre>
 
 <pre class="clear">
@@ -664,12 +619,10 @@ StopWhenUnneeded=yes
 
 
 
-* *adding events*
+* **adding events**
 Adding events to these targets is as easy as dropping them into the correct wants folder. 
 
-So if you wish for a particular event to take place daily, create a systemd service file 
-
-and drop it into the relevant folder.
+So if you wish for a particular event to take place daily, create a systemd service file and drop it into the relevant folder.
 
 For example, if you wish to run mlocate-update.service daily (which runs mlocate), you would create the following file:
 <pre class="clear">
@@ -690,7 +643,7 @@ ExecStart=/usr/bin/updatedb --option1 --option2     # More than one ExecStart ca
 </pre>
 
 
-* enable and start the timers
+* **enable and start the timers**
 <pre class="clear">
  # systemctl enable timer-{hourly,daily,weekly}.timer && systemctl start timer-{hourly,daily,weekly}.timer
 </pre>
@@ -726,7 +679,8 @@ The check status:
  # timedatectl status
 </pre>
 
-gives you a very nice overview of the current settings of the system clock and RTC.     Example:
+gives you a very nice overview of the current settings of the system clock and RTC.
+Example:
 <pre class="clear">
       Local time: Sun 2014-02-02 15:56:40 CET
   Universal time: Sun 2014-02-02 14:56:40 UTC
@@ -772,7 +726,7 @@ Set your time zone of choice:
 
 To enable NTP  (NTP based network time synchronization):
 * Install NTP:
-<pre class="clear">equo i net-misc/ntp</pre>
+<pre class="clear">equo install net-misc/ntp</pre>
 
 
 * Enable service to start at boot and start it now:
@@ -904,18 +858,13 @@ In order for the readahead to work, you should reboot a couple of times, because
 
 ## filesystem mounts
 
-If btrfs is in use for the root filesystem, there is no need for a fsck on every boot like other filesystems. If this is the case,
-
-you may want to mask the systemd-fsck-root.service 
+If btrfs is in use for the root filesystem, there is no need for a fsck on every boot like other filesystems. If this is the case,you may want to mask the systemd-fsck-root.service 
 
 systemd will still fsck any relevant filesystems with the systemd-fsck@.service
 
-
 You can also remove API filesystems from /etc/fstab, as systemd will mount them itself.
 
-It is not uncommon for users to have a /tmp and/or /dev/shm entry carried over from sysvinit, but you may have noticed 
-
-that systemd already takes care of this.  If you want to give /tmp a size, say: 4Gb., you can edit the file:
+It is not uncommon for users to have a /tmp and/or /dev/shm entry carried over from sysvinit, but you may have noticed that systemd already takes care of this.  If you want to give /tmp a size, say: 4Gb., you can edit the file:
 <pre class="clear">nano -w /usr/lib/systemd/system/tmp.mount</pre>
 and add *size#4096M* to section: [Mount] :
 <pre class="clear">
@@ -927,12 +876,9 @@ Options#mode#1777,strictatime,size#4096M
 </pre>
 
 
-
 If on seperate partitions, other filesystems like /home and /boot can be mounted with custom mount units. 
 
-Adding noauto,x-systemd.automount will buffer all access to that partition, and will fsck and mount it on first access, 
-
-reducing the number of filesystems it must fsck/mount during the boot process.
+Adding noauto,x-systemd.automount will buffer all access to that partition, and will fsck and mount it on first access, reducing the number of filesystems it must fsck/mount during the boot process.
 
 
 *NOTE:* this will make your /home and /boot filesystem type autofs, which is ignored by mlocate by default. 
@@ -941,15 +887,13 @@ If you use mlocate, and want /home and/or /boot still to be indexed by mlocate.,
 <pre class="clear">/etc/updatedb.conf</pre>}}
 and remove the entries from the "PRUNEPATHS#" " :
 <pre class="clear">
-PRUNE_BIND_MOUNTS # "yes"
-PRUNEFS # "9p afs anon_inodefs auto autofs bdev binfmt_misc cgroup cifs coda configfs cpuset cramfs debugfs devpts devtmpfs ecryptfs exofs ftpfs fuse fuse.enc$
-PRUNENAMES # ".git .hg .svn"
-PRUNEPATHS # "/afs /media /mnt /home/home2 /net /sfs /tmp /udev /var/cache /var/lib/pacman/local /var/lock /var/run /var/spool /var/tmp"
+PRUNE_BIND_MOUNTS = "yes"
+PRUNEFS = "9p afs anon_inodefs auto autofs bdev binfmt_misc cgroup cifs coda configfs cpuset cramfs debugfs devpts devtmpfs ecryptfs exofs ftpfs fuse fuse.enc$
+PRUNENAMES = ".git .hg .svn"
+PRUNEPATHS = "/afs /media /mnt /home/home2 /net /sfs /tmp /udev /var/cache /var/lib/pacman/local /var/lock /var/run /var/spool /var/tmp"
 </pre>
 
-The speedup of automounting /home & /boot may not be more than a second or two, depending on your system, 
-
-so this trick may not be worth it.
+The speedup of automounting /home & /boot may not be more than a second or two, depending on your system, so this trick may not be worth it.
 <pre class="clear">nano -w /etc/fstab
 
 /dev/sda3	/               ext4    noatime,defaults        			1 1
