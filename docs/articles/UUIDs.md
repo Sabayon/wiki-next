@@ -4,7 +4,7 @@
 A Universally Unique Identifier (UUID) is an identifier standard used in software construction, standardized by the Open Software Foundation (OSF) as part of the Distributed Computing Environment (DCE).  With UUID Linux kernel should automatically find and map (read as mount to exact location) volumes to storage device. This saves lots of time and avoid `/etc/fstab` breaks.
 
 ### How do I find the UUID to my drive?
-Let's say I have /dev/sda5 and I want to find out the UUID, as root:
+Let's say I have `/dev/sda5` and I want to find out the UUID, as root:
 <pre class="clear">
      # vol_id --uuid /dev/sda5
      62c289ef-ba8f-43bf-98bd-5150c7821ad8
@@ -31,7 +31,7 @@ Let's say I have /dev/sda5 and I want to find out the UUID, as root:
 
 ## UUID and fstab
 ### How do I add this to my fstab?
-You will need to make a directory first.  Lets say I have /dev/sdb5 as storage so I need to set that up for mounting
+You will need to make a directory first.  Lets say I have `/dev/sdb5` as storage so I need to set that up for mounting
 <pre class="clear">
      # mkdir -p /media/storage
 </pre>
@@ -60,7 +60,7 @@ List devices:
 </pre>
 ## Renaming a Label
 ### e2label
-As time goes on you make changes and may need to change the name of a label.  Very simple with e2label:
+As time goes on you make changes and may need to change the name of a label.  Very simple with `e2label`:
 <pre class="clear">
      # e2label <dev> <label>
 </pre>
