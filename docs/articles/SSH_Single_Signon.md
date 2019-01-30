@@ -11,16 +11,16 @@ First of all, we are going to need the pam_ssh module.  You may already have thi
 <pre class="clear"># equo install pam_ssh </pre>
 
 ## Create Key Pair
-Now we need to create the key pair to authenticate yourself across the network.  To do so, run this as your '''regular user'''.
-'''WARNING: This should NOT be done as root, and you should never, ever ssh using the root account'''
+Now we need to create the key pair to authenticate yourself across the network.  To do so, run this as your **regular user**.
+***WARNING: This should NOT be done as root, and you should never, ever ssh using the root account***
 <pre class="clear">$ ssh-keygen -t dsa </pre>
 
 This will ask where to save the file, just press enter as the default is what we want.  
 
-After that it will ask for the passphrase you want to use.  It is important to '''set the passphrase to the exact same password as your normal logon password''' for this user.  This is the password for the user on the current machine, not the one for other machines, even if they differ.
+After that it will ask for the passphrase you want to use.  It is important to ***set the passphrase to the exact same password as your normal logon password*** for this user.  This is the password for the user on the current machine, not the one for other machines, even if they differ.
 
 When that is done, two files should of been created `~/.ssh/id_dsa` and `~/.ssh/id_dsa.pub` .  
-'''NOTE: It is very important to keep `~/.ssh/id_dsa private`, it should be only readable by your user, to make sure of this, run this command:'''
+***NOTE: It is very important to keep `~/.ssh/id_dsa private`, it should be only readable by your user, to make sure of this, run this command:***
 <pre class="clear">$ chmod 600 ~/.ssh/id_dsa </pre>
 
 ## Distribute Public Key
@@ -28,7 +28,7 @@ Now we need to give all of our remote machines our public key so we can use it t
 <pre class="clear">$ ssh-copy-id -i ~/.ssh/id_dsa.pub username@remotehostname </pre>
 
 ## Configure PAM
-We need to tell PAM to use our logon password to spawn an ssh-agent and load the rsa key we just made.  There are two lines for pam_ssh.so we need to add, so your system-auth should look something like this:
+We need to tell PAM to use our logon password to spawn an ssh-agent and load the rsa key we just made.  There are two lines for `pam_ssh.so` we need to add, so your system-auth should look something like this:
 `/etc/pam.d/system-auth`
 <pre class="clear">
 auth       required     pam_env.so
@@ -51,12 +51,13 @@ session    optional     pam_ssh.so
 </pre>
 
 ## Summary
-That's all we need to do, you should be able to logout and log back in with the ability to ssh to your remote hosts without a password (you may need to restart your login manager with `/etc/init.d/xdm restart`)
+That's all we need to do, you should be able to logout and log back in with the ability to ssh to your remote hosts without a password. You may need to restart your login manager with `systemctl restart lightdm` or simply reboot.
 
-'''WARNING:''' This ''will'' remove some aspect of physical security on whatever machine you set this up on.  If physical security is a concern, please use a locking screensaver or logout whenever you leave your system unattended.  This is something you should do anyway to protect your local machine from malicious passersby
+***WARNING: This WILL remove some aspect of physical security on whatever machine you set this up on.  If physical security is a concern, please use a locking screensaver or logout whenever you leave your system unattended.  This is something you should do anyway to protect your local machine from malicious passersby***
 
 ## Troubleshooting
-If you are having problems creating or distributing your keys, take a look at [http://gentoo-wiki.com/SECURITY_SSH_without_a_password] for more information on that task.
+If you are having problems creating or distributing your keys, take a look at 
+http://gentoo-wiki.com/SECURITY_SSH_without_a_password for more information on that task.
 
 If you are still prompted for a password after completing this guide, there are a few files that you may need to check.  Make sure both of these entries are set to "yes" on your remote hosts. 
 `/etc/ssh/sshd_config`
