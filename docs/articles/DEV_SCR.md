@@ -2,7 +2,7 @@
 
 ## Package Requests
 
-If you are not familiar with the infrastructure and how to make a Pull Request to get a package inside the community repositories, open a bug request [https://bugs.sabayon.org/enter_bug.cgi?product=Community%20Repositories]
+If you are not familiar with the infrastructure and how to make a Pull Request to get a package inside the community repositories, open a bug request https://bugs.sabayon.org/enter_bug.cgi?product=Community%20Repositories
 
 ## Setup a local testing environment
 
