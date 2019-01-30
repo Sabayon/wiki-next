@@ -69,7 +69,7 @@ or install directly using a shortcut in the searchbox: ***do:install xfce4-meta*
 ***GDM*** will also be removed, so install a alternative LoginManager: (in this case, i choose lightdm, it works with everything)
 <pre class="clear"># equo install lightdm</pre>
 
-==Switching DMs==
+## Switching DMs
 Remove from boot entry starting GDM:
 <pre class="clear"># systemctl disable gdm.service</pre>
 Now enable new LoginManager to start at boot:
