@@ -1,5 +1,8 @@
-Packages are, by default, installed without debugging symbols in Sabayon. This saves space, specially for users that are not developers and are not interested in debugging applications. But for those of us who are developers, finding the debug symbols of Entropy packages can come in handy. To do so, change the value of the <tt>splitdebug</tt> variable to enable in <tt>/etc/entropy/client.conf</tt>
+# Enabling Debugging Symbols
 
+Packages are, by default, installed without debugging symbols in Sabayon. This saves space, specially for users that are not developers and are not interested in debugging applications. But for those of us who are developers, finding the debug symbols of Entropy packages can come in handy. To do so, change the value of the `splitdebug` variable to enable in `/etc/entropy/client.conf`
+
+<pre class="clear">
  # Enable the installation of debug files
  # Also known as "splitdebug" support
  # Valid parameters: disable, enable, true, false, disabled, enabled, 0, 1
@@ -11,9 +14,10 @@ Packages are, by default, installed without debugging symbols in Sabayon. This s
  # get /usr/lib/debug metadata files installed. That's it.
  # You can safely remove /usr/lib/debug without affecting
  # Operating System functionality, at any time.
+</pre>
 
-After modifying this, next time you installa package, you will also get debug symbols installed inside <tt>/usr/lib/debug</tt>. For example, if you run <tt>equo install networkmanager</tt> you will get the following debugging files:
-
+After modifying this, next time you install a package, you will also get debug symbols installed inside `/usr/lib/debug`. For example, if you run `equo install networkmanager` you will get the following debugging files:
+<pre class="clear">
  >>  ### /usr/lib/debug
  >>  ### /usr/lib/debug/usr
  >>  ### /usr/lib/debug/usr/bin
@@ -36,28 +40,28 @@ After modifying this, next time you installa package, you will also get debug sy
  >>  ### /usr/lib/debug/usr/libexec/nm-dispatcher.action.debug
  >>  ### /usr/lib/debug/usr/sbin
  >>  ### /usr/lib/debug/usr/sbin/NetworkManager.debug
+</pre>
+
+### glibc missing debug info
+
+The following two problems may be resolved by adding debug symbols for the package `sys-libs/glibc`.
 
 
-===glibc missing debug info===
-
-The following two problems may be resolved by adding debug symbols for the package sys-libs/glibc.
-
-
-====GDB: libpthread library mismatch with libthread_db====
+#### GDB: libpthread library mismatch with libthread_db
 
 If there is no debug symbols for libpthread library, GDB will not directly say that there is no debugging symbols for libpthread, instead, whenever you start GDB, it will show below warning,
 
-<pre>
+<pre class="clear">
 warning: Unable to find libthread_db matching inferior's thread library, thread debugging will not be available.
 </pre>
 
-See this [http://bugs.sabayon.org/show_bug.cgi?id=3316 link] for more information.
+See this [http://bugs.sabayon.org/show_bug.cgi?id=3316] link for more information.
 
-====Valgrind: Needs a non-stripped LD====
+#### Valgrind: Needs a non-stripped LD
 
 When executing valgrind with no option in particular (for example: `valgrind /bin/true`) you may get the following error message:
 
-<pre>
+<pre class="clear">
 valgrind:  Fatal error at startup: a function redirection
 valgrind:  which is mandatory for this platform-tool combination
 valgrind:  cannot be set up.  Details of the redirection are:
@@ -87,11 +91,11 @@ valgrind:  Cannot continue -- exiting now.  Sorry.
 </pre>
 
 
-====Resolution====
+#### Resolution
 
-To fix both these issues, just enable splitdebug inside /etc/entropy/client.conf and reinstall sys-libs/glibc package.
+To fix both these issues, just enable splitdebug inside `/etc/entropy/client.conf` and reinstall `sys-libs/glibc` package.
 
-<pre>
+<pre class="clear">
 # equo install sys-libs/glibc
 </pre>
 
