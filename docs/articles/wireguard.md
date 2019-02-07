@@ -1,6 +1,8 @@
 # Wireguard
 
-WireGuard is a new, experimental VPN protocol that aims to offer a simpler, faster, and more secure solution for VPN tunneling than the existing VPN protocols. WireGuard has some major differences when compared to OpenVPN and IPSec, such as the code size (under 4,000 lines!), speed, and encryption standards. You can learn more about it here https://restoreprivacy.com/wireguard/ 
+WireGuard is a new, experimental VPN protocol that aims to offer a simpler, faster, and more secure solution for VPN tunneling than the existing VPN protocols. WireGuard has some major differences when compared to OpenVPN and IPSec, such as the code size (under 4,000 lines!), speed, and encryption standards. 
+
+You can learn more about it here https://www.wireguard.com/ and https://restoreprivacy.com/wireguard/
 
 ## Setting up Wireguard
 
@@ -55,5 +57,14 @@ Endpoint = {Your SERVER's External IP or Dynamic DNS Name}:51820
 PersistentKeepalive = 25
 PublicKey = {Your SERVER's PUBLIC Key HERE}
 </pre>
+
+### Enabling your Wireguard Interface
+Systemd is used to enable/disable/start/stop all services. This includes your VPNs.
+
+<pre class="clear"> 
+sudo systemctl start wg-quick@wg0
+</pre>
+
+View the systemd guide for more information on enabling upon boot, starting/stopping/restarting/disabling/etc.
 
 And there you have it! You have your own personal VPN using wireguard. As a side note, wireguard also has a free Android app so you can connect your new VPN to you phone. This makes you safe on those sketchy free wifi connections in stores and restuarants.
