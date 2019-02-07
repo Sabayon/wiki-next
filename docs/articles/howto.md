@@ -13,6 +13,7 @@
 * [Firewall - firewalld](firewall.md)
 * [LAMP](lamp.md)
 * [SSH SSO](SSH_Single_Signon.md)
+* [Wireguard VPN](wireguard.md)
 
 ### Software Management
 * [Entropy](entropy.md)
