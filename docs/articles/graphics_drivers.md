@@ -11,14 +11,14 @@ If you don't feel fully comfortable about this command.
 Back up your file or use nano (vi etc.) to edit the file!
 </pre>
 
-## EXPERIMENTAL AMDGPU w/Display Code
+## EXPERIMENTAL AMDGPU
 
 <pre class="clear">
 ######### Not all AMD Display Code is not mainline! #########
 This contains incomplete code that has yet not been adopted into the mainline kernel. 
 Results may vary and this may not be the same as the finalized versions of code.
 </pre>
-Be aware, this is experimental and you're on your own. This is not a supported setup. It only allows you early access to AMDGPU upgrades.
+Beware, this is experimental and you're on your own. This is not a supported setup. It only allows you early access to AMDGPU upgrades.
 You'll also want to be aware that you should still keep your current kernel in case anything goes wrong. That will allow you to continue booting into your system from the advanced options in GRUB by selecting the older kernel. 
 
 
@@ -102,6 +102,14 @@ now lets switch from opensource opengl libraries to proprietary nvidia opengl li
 localhost root # eselect opengl set nvidia
 </pre>
 ## Open Source - Switching to Nouveau drivers
+<pre class="clear">
+######### ***WARNING! FERMI AND OLDER CARDS HAVE NO RECLOCKING SUPPORT*** #########
+Fermi cards (Geforce 400 and 500 series cards) and older do not have reclocking support.
+What does this mean exactly? Basically your GPU boots up in a power saving state. The pstate is on "LOW"
+This means the cards will boot up with extremely low clock speeds. Without reclocking support you cannot
+change the power state to force the GPU into performance mode, making it able to play games. This driver
+is not recommended for GPUs older than Geforce 600 Series unless you're using it for basic productivity tasks.
+</pre>
 If Sabayon is installed you reboot and you find you're stuck at a login terminal or just wan to switch to open source drivers, this is a simple fix. 
 Just login with your user you created. Then we'll remove the proprietary drivers and the blacklist for nouveau using the following:
 
@@ -121,5 +129,9 @@ localhost root # equo update; equo remove nvidia-drivers nvidia-userspace
 Now lets make sure we're using the correct opengl libraries
 <pre class="clear">
 localhost root # eselect opengl set xorg-x11
+</pre>
+Not done yet. We need to rebuild initramfs so that it doesn't include nvidia-drivers upon boot.
+<pre class="clear">
+localhost root # sabayon-dracut --rebuild-all
 </pre>
 Now reboot and you'll be using nouveau. If you ever feel like returning to proprietary drivers, you'll need to blacklist nouveau again.
