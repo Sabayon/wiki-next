@@ -32,10 +32,10 @@ localhost root # equo install v86d bison make cmake automake gcc genkernel-next 
 Now lets download a kernel with display code.
 <pre class="clear">
 localhost root # git clone -b amd-staging-drm-next --depth=1 git://people.freedesktop.org/~agd5f/linux    
-localhost root # mv linux /usr/src/linux-5.1.0-amdgpu
+localhost root # mv linux /usr/src/linux-5.0.0-rc1+
 localhost root # cd /usr/src
 localhost root # rm -rf linux
-localhost root # ln -s linux-5.1.0-amdgpu/ linux
+localhost root # ln -s linux-5.0.0-rc1+/ linux
 localhost root # cd linux
 </pre>
 
@@ -44,7 +44,7 @@ You can also double check Device Drivers -> Graphics Support -> Display Engine C
 <pre class="clear">
 localhost root # zcat /proc/config.gz > /usr/src/config
 localhost root # genkernel --kernel-config=/usr/src/config --menuconfig --splash=sabayon kernel
-localhost root # sabayon-dracut --rebuild-all
+localhost root # dracut -H -q -f -o systemd -o systemd-initrd -o systemd-networkd -o dracut-systemd --kver=5.0.0-rc1+ /boot/initramfs-genkernel-x86_64-5.0.0-rc1+
 localhost root # grub2-mkconfig -o /boot/grub/grub.cfg 
 </pre>
 
