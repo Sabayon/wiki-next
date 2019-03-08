@@ -129,7 +129,7 @@ nano -w /etc/hosts
 
 `layman` is a gentoo tool to manage portage overlays. We will use it to get our hands on the sabayon overlay.
 
-{{Note|entropy and equo are in regular portage, hence: '''skip this step'''.
+**Notice: `entropy` and `equo` are in regular portage, hence: '''skip this step'''**
 
 <pre class="clear">
 # emerge --sync                # make sure portage is fully up to date... or not. Up to you. portage snapshots are done daily, i see no need to sync.
