@@ -1,0 +1,594 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Sabayon Linux">
+      
+      
+        <link rel="canonical" href="https://sabayon.github.io/wiki-next/articles/DEV_Devkit/">
+      
+      
+        <meta name="author" content="Sabayon">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.1, mkdocs-material-3.1.0">
+    
+    
+      
+        <title>Sabayon-devkit - Sabayon Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.11e41852.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.20ef595d.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#sabayon-devkit" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://sabayon.github.io/wiki-next/" title="Sabayon Wiki" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Sabayon Wiki
+              </span>
+              <span class="md-header-nav__topic">
+                Sabayon-devkit
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/Sabayon/wiki-next/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Sabayon/wiki-next
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://sabayon.github.io/wiki-next/" title="Sabayon Wiki" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Sabayon Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/Sabayon/wiki-next/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Sabayon/wiki-next
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Contributing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../documentation/" title="Wiki" class="md-nav__link">
+      Wiki
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../irc/" title="IRC|Testers" class="md-nav__link">
+      IRC|Testers
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../entropy/" title="Entropy Package Manager" class="md-nav__link">
+      Entropy Package Manager
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../howto/" title="How To Index" class="md-nav__link">
+      How To Index
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notice" title="NOTICE" class="md-nav__link">
+    NOTICE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing" title="Installing" class="md-nav__link">
+    Installing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sabayon-entropypreservedlibs" title="sabayon-entropypreservedlibs" class="md-nav__link">
+    sabayon-entropypreservedlibs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites-for-the-building-and-repository-creator-script" title="Prerequisites for the building and repository creator script" class="md-nav__link">
+    Prerequisites for the building and repository creator script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-packages" title="Building packages" class="md-nav__link">
+    Building packages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notice_1" title="NOTICE" class="md-nav__link">
+    NOTICE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#folder-structure" title="Folder structure" class="md-nav__link">
+    Folder structure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" title="Advanced usage" class="md-nav__link">
+    Advanced usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-repository" title="Creating repository" class="md-nav__link">
+    Creating repository
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notice_2" title="NOTICE" class="md-nav__link">
+    NOTICE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notice_3" title="NOTICE" class="md-nav__link">
+    NOTICE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage_1" title="Advanced usage" class="md-nav__link">
+    Advanced usage
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Sabayon/wiki-next/edit/master/docs/articles/DEV_Devkit.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="sabayon-devkit">Sabayon-devkit</h1>
+<h3 id="notice">NOTICE</h3>
+<p><strong><em>Repository created with this method, can't be tracked by Eit. Responsability to rebuild the packages when they are broken against main repositories is on your behalf. The Article is still a draft</em></strong></p>
+<p><strong><em>Sabayon Devkit</em></strong> is a suite of tools with the goal of making the life easy when dealing with Sabayon internal structure, mostly contains tools related to package mantaining. </p>
+<h2 id="installing">Installing</h2>
+<p>It is available on Entropy (see [http://packages.sabayon.org/quicksearch?q=app-misc%2Fsabayon-devkit app-misc/sabayon-devkit], and [http://gpo.zugaina.org/app-misc/sabayon-devkit gpo.zugaina.org] for portage), but you can install on well on other distros from the sources(https://github.com/Sabayon/devkit), the tools leverage Docker and does not modify your running system.</p>
+<p>From the terminal of your Sabayon box:</p>
+<p>sudo equo install sabayon-devkit</p>
+<h2 id="sabayon-entropypreservedlibs">sabayon-entropypreservedlibs</h2>
+<p>When you see messages like this</p>
+<p>☛ There are 2 preserved libraries on the system
+ ╠ /usr/lib64/libkipi.so.11.1.0 [libkipi.so.11:2 -&gt; kde-apps/libkipi-15.08.3]
+ ╠ /usr/lib64/libkipi.so.11 [libkipi.so.11:2 -&gt; kde-apps/libkipi-15.08.3]</p>
+<p>This happens mostly when you mixed Entropy with Portage, or you may still have very old and outdated packages installed.</p>
+<p>You can use <strong><em>sabayon-entropypreservedlibs</em></strong> to see what packages causes the breakage. </p>
+<p>sabayon-entropypreservedlibs</p>
+<blockquote>
+<p>No packages request outdated libs</p>
+</blockquote>
+<h2 id="prerequisites-for-the-building-and-repository-creator-script">Prerequisites for the building and repository creator script</h2>
+<ul>
+<li>Docker installed in the machine (''sudo equo i docker''), and the daemon started (''sudo systemctl start docker''). You might want enable it on start ''sudo systemctl enable docker''</li>
+<li>if you don't want to run that as root, the user where are you running the script must be in the docker group (''sudo gpasswd -a $USER docker'') or better, having enabled the docker bin in sudoers.</li>
+<li>Space: At least you will need around 2GB of disk space due to the Docker Image that contains all the needed tools.</li>
+</ul>
+<p>''sabayon-buildpackages'' and ''sabayon-createrepo'' are just a script wrapper around the development Docker container.</p>
+<p>It's strongly encouraged to create a directory for each your project (repository) and run the commands inside to it.</p>
+<h2 id="building-packages">Building packages</h2>
+<h3 id="notice_1">NOTICE</h3>
+<p><strong><em>This phase requires bandwitdth and disk space that differ for each case. ''E.g. if you decide to compile a package that have a huge dependency list</em></strong></p>
+<p>You can build packages by running:</p>
+<p>sabayon-buildpackages <your_package_atom></p>
+<p>Where ''<your_package_atom>'' is in the same syntax as Emerge.</p>
+<p>DOCKER_PULL_IMAGE=1 sabayon-buildpackages app-foo/foobar --equo foo-misc/foobar --layman foo --layman bar foo</p>
+<ul>
+<li><strong><em>--layman foobar</em></strong> -- tells the script to add the "foobar" overlay from layman</li>
+<li><strong><em>--equo foo-misc/foobar</em></strong> -- tells the script to install "foo-misc/foobar" before compiling</li>
+</ul>
+<p>Environment variables:</p>
+<ul>
+<li><strong><em>DOCKER_PULL_IMAGE</em></strong> -- tells the script to update the docker image before compiling, enable it with 1, disable with 0</li>
+<li><strong><em>OUTPUT_DIR</em></strong> -- optional, default to "portage_artifacts" in your current working directory, it is the path where emerge generated tbz2 are stored (absolute path)</li>
+<li><strong><em>LOCAL_OVERLAY</em></strong> -- optional, you can specify the path to your local overlay (absolute path) The arguments are the packages that you want compile, they can be also in the complete form e.g. =foo-bar/misc-1.2</li>
+</ul>
+<p>Docker will now pull (if not already) the 64bit Docker Development image. 
+Then will be created a folder in your current working directory named <strong><em>portage_artifacts</em></strong>. That folder will contain packages built with [[Portage]] by the Docker image upon a successful build.</p>
+<h2 id="folder-structure">Folder structure</h2>
+<p>This is the folder structure of your workspace by default, but you can tweak part of it to your tastes with Environment variables:</p>
+<p>myproject/
+ myproject/portage_artifacts/
+ myproject/entropy_artifacts/
+ myproject/local_overlay/
+ myproject/specs/</p>
+<ul>
+<li>''myproject/portage_artifacts/'' -- Created by default when sabayon-buildpackages is used. It contains the portage artifacts, they will be consumed in the next steps</li>
+<li>''myproject/entropy_artifacts/'' -- Created when sabayon-createrepo is started. It contains the entropy repository files (It can be already present if you want to update your repository)</li>
+<li>''myproject/local_overlay/'' -- is the location of your personal overlay (if necessary)</li>
+<li>''myproject/specs'' -- Create it to customize the building process. It can contain custom files for make.conf, uses, envs, masks, unmasks and keywords for package compilation options
+the specs folder is structured like this and it's merely optional.</li>
+</ul>
+<p>as long as you create those files inside the <strong><em>spec/</em></strong> folder they are used:</p>
+<ul>
+<li>''custom.unmask'' -- that's the place for custom unmasks</li>
+<li>''custom.mask'' -- contain your custom masks</li>
+<li>''custom.use'' -- contain your custom use flags</li>
+<li>''custom.env'' -- contain your custom env specifications</li>
+<li>''custom.keywords'' -- contain your custom keywords</li>
+<li>''make.conf'' -- it will replace the make.conf on the container with yours.
+you can override the Architecture folder in which files are placed specifying in the SAB_ARCH environment variable. Default is "intel" (can be armarch as for now)</li>
+</ul>
+<h2 id="advanced-usage">Advanced usage</h2>
+<p>The tool allows customization with environment variables and option that alters it's behavior [https://github.com/Sabayon/devkit/blob/master/README.md#building-package-in-a-clean-environment]</p>
+<h2 id="creating-repository">Creating repository</h2>
+<h3 id="notice_2">NOTICE</h3>
+<p><strong><em>The tools are intended to run subsequentially, but they are completely untied. You can create repository with <code>sabayon-createrepo</code> also if where not compiled with <code>sabayon-buildpackages</code> </em></strong></p>
+<p>You can build packages by running on the same directory you run ''sabayon-buildpackages'':</p>
+<p>sabayon-createrepo
+ REPOSITORY_NAME=mytest REPOSITORY_DESCRIPTION="My Wonderful Repository" sabayon-createrepo</p>
+<ul>
+<li><strong><em>REPOSITORY_NAME</em></strong> -- optional, is your repository name id</li>
+<li><strong><em>REPOSITORY_DESCRIPTION</em></strong> -- optional, is your repository description</li>
+<li><strong><em>PORTAGE_ARTIFACTS</em></strong> -- optional if you use the tools in the same dir, you can specify where portage artifacts (*.tbz2 files) are (absolute path required)</li>
+<li><strong><em>OUTPUT_DIR</em></strong> -- optional, you can specify where the entropy repository will be stored</li>
+</ul>
+<p>You can also put your .tbz2 file externally built inside ''entropy_artifacts/'' in your workspace folder (you can create it if not already present) and run <strong><em>sabayon-createrepo</em></strong> to generate a repository from them. <strong><em>sabayon-createrepo</em></strong> can be called sequentially, and it will update the repository found on ''entropy_artifacts/'' with the packages ( in .tbz2 ) in ''portage_artifacts/''.  </p>
+<p>In both sabayon-createrepo and sabayon-buildpackages you can override the docker image used with the environment variable <strong><em>DOCKER_IMAGE</em></strong>.</p>
+<p>It will be created an ''entropy_artifacts/'' folder that will contain your repository files generated from the packages built from the step above.</p>
+<h3 id="notice_3">NOTICE</h3>
+<p><strong><em>When running sabayon-createrepo the </em>.tbz2 of the </strong>*PORTAGE_ARTIFACTS<strong><em> (''entropy_artifacts/'' by default) folder are removed.</em></strong></p>
+<h2 id="advanced-usage_1">Advanced usage</h2>
+<p>The tool allows customization with environment variables and option that alters it's behavior [https://github.com/Sabayon/devkit/blob/master/Documentation.md]</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.9e1f3b71.js"></script>
+      
+      <script>app.initialize({version:"1.0.1",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

@@ -1,0 +1,660 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Sabayon Linux">
+      
+      
+        <link rel="canonical" href="https://sabayon.github.io/wiki-next/articles/LVM/">
+      
+      
+        <meta name="author" content="Sabayon">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.1, mkdocs-material-3.1.0">
+    
+    
+      
+        <title>LVM - Logical Volume Managment - Sabayon Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.11e41852.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.20ef595d.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lvm-logical-volume-managment" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://sabayon.github.io/wiki-next/" title="Sabayon Wiki" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Sabayon Wiki
+              </span>
+              <span class="md-header-nav__topic">
+                LVM - Logical Volume Managment
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/Sabayon/wiki-next/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Sabayon/wiki-next
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://sabayon.github.io/wiki-next/" title="Sabayon Wiki" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Sabayon Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/Sabayon/wiki-next/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Sabayon/wiki-next
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Contributing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../documentation/" title="Wiki" class="md-nav__link">
+      Wiki
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../irc/" title="IRC|Testers" class="md-nav__link">
+      IRC|Testers
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../entropy/" title="Entropy Package Manager" class="md-nav__link">
+      Entropy Package Manager
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../howto/" title="How To Index" class="md-nav__link">
+      How To Index
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-use-lvm" title="Why use LVM?" class="md-nav__link">
+    Why use LVM?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-basics" title="The Basics" class="md-nav__link">
+    The Basics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-specifics" title="The Specifics" class="md-nav__link">
+    The Specifics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resizing-partitions" title="Resizing Partitions" class="md-nav__link">
+    Resizing Partitions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moving-partitions" title="Moving Partitions" class="md-nav__link">
+    Moving Partitions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#many-partitions" title="Many Partitions" class="md-nav__link">
+    Many Partitions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snapshots" title="Snapshots" class="md-nav__link">
+    Snapshots
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-how-do-i-start-using-lvm" title="So how do I start using LVM?" class="md-nav__link">
+    So how do I start using LVM?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resizing-partitions_1" title="Resizing Partitions" class="md-nav__link">
+    Resizing Partitions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moving-partitions_1" title="Moving Partitions" class="md-nav__link">
+    Moving Partitions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snapshots_1" title="Snapshots" class="md-nav__link">
+    Snapshots
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mounting-additional-lvms-manually" title="Mounting Additional LVMs Manually" class="md-nav__link">
+    Mounting Additional LVMs Manually
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Sabayon/wiki-next/edit/master/docs/articles/LVM.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lvm-logical-volume-managment">LVM - Logical Volume Managment</h1>
+<p>LVM stands for Logical Volume Management. It is a system of managing logical volumes, or filesystems, that is much more advanced and flexible than the traditional method of partitioning a disk into one or more segments and formatting that partition with a filesystem.</p>
+<h2 id="why-use-lvm">Why use LVM?</h2>
+<p>So why would you want to use LVM when you can normal partitions just fine? The answer is that lvm can do resizes, moves, and normal things you could do with typical partitions, but includes tools for easier mgmt and snapshots.</p>
+<h2 id="the-basics">The Basics</h2>
+<p>There are 3 things that LVM manages:</p>
+<ul>
+<li>**Volume Groups</li>
+<li>**Physical Volumes</li>
+<li>**Logical Volumes</li>
+</ul>
+<p>A Volume Group is a named collection of physical and logical volumes. Typical systems only need one Volume Group to contain all of the physical and logical volumes on the system. Physical Volumes correspond to disks; they are block devices that provide the space to store logical volumes. Logical volumes correspond to partitions: they hold a filesystem. Unlike partitions though, logical volumes get names rather than numbers, they can span across multiple disks, and do not have to be physically contiguous.</p>
+<h2 id="the-specifics">The Specifics</h2>
+<p>One of the biggest advantages LVM has is that most operations can be done on the fly, while the system is running. Most operations that you can do with gparted require that the partitions you are trying to manipulate not be in use at the time. You have to boot from a live image to perform the necessary resize, move, etc functions. LVM also circumvents the limits of the msdos partition table format with gparted, limiting you to only 4 primary partitions, and all logical partitions must be contained within one contiguous extended partition.</p>
+<h2 id="resizing-partitions">Resizing Partitions</h2>
+<p>With gparted you can expand and shrink partitions, but only if they are not in use. LVM can expand a partition while it is mounted, if the filesystem used on it also supports that ( like the usual ext3/4 ). When expanding a partition, gparted can only expand it into adjacent free space, but LVM can use free space anywhere in the Volume Group, even on another disk. Using typical paritions often means that you must move other partitions around to make space to expand one, which is a very time consuming process that can result in massive data loss if it fails or is interrupted ( power loss ).</p>
+<h2 id="moving-partitions">Moving Partitions</h2>
+<p>Moving partitions with gparted is usually only necessary in the first place because of the requirement that partitions be physically contiguous. LVM isn't restricted in this way. LVM can move a partition while it is in use, and will not corrupt your data if it is interrupted. In the event that your system crashes or loses power during the move, you can simply restart it after rebooting and it will finish normally. One example would be installing a new SSD drive. Simply plug it in, boot it up, and ask lvm to move the running root filesystem to the new drive in the background while you continue working uninterrupted. Another reason you might want to move is to replace an old disk with a new, larger one. You can migrate the system to the new disk while using it, and then remove the old one later.</p>
+<h2 id="many-partitions">Many Partitions</h2>
+<p>If you like to test various Linux distributions, or run a server with many services, cloud storage, file sharing, etc. you can quickly end up with quite a few partitions. With conventional msdos partitions, this becomes problematic due to its limitations. With LVM you can create as many Logical Volumes as you wish, and it is usually quite easy since you usually have plenty of free space left. Usually people allocate the entire drive to one partition when they first install, but since extending a partition is so easy with LVM, there is no reason to do this. It is better to allocate only what you think you will need, and leave the rest of the space free for future use. If you end up running out of the initial allocation, adding more space to that volume is just one command that completes immediately while the system is running normally.</p>
+<h2 id="snapshots">Snapshots</h2>
+<p>This is something you simply can not do without LVM or a filesystem using a snapshot function such as btrfs and zfs. It allows you to freeze an existing Logical Volume in time, at any moment, even while the system is running. You can continue to use the original volume normally, but the snapshot volume appears to be an image of the original, frozen in time at the moment you created it. You can use this to get a consistent filesystem image to back up, without shutting down the system. You can also use it to save the state of the system, so that you can later return to that state if you mess things up. You can even mount the snapshot volume and make changes to it, without affecting the original.</p>
+<h2 id="so-how-do-i-start-using-lvm">So how do I start using LVM?</h2>
+<p>Sadly Calamares support for LVM is severely lacking. You'll need to create your Logical Volume (lv) using <code>parted</code>, <code>partitionmanager</code>, or <code>gparted</code> before you can install on top of it. First, you need to know if you're using UEFI or old BIOS. If your machine was built after 2010, you'll most likely be using UEFI BIOS. UEFI booting requires the use of an EFI partition "/boot/efi" the size of 100M-300M at the beginning of the drive (sda1). Next you'll need another physical boot parition the size of 300M to 500M for /boot (sda2). Some machines cannot read a boot partition past 100G into the hard drive so keeping it closer to the beginning of the drive is wise. Using LVM could accidently let you move your boot partition into an unbootable location. Afterwards, you can use the rest of the space for a single LVM partition (sda3).</p>
+<p>Now there are a couple ways to proceed from here. Having an LVM partition does not immediately give you a Logical Volume. The Partition(s) which are Physical Volumes (pv) must be initialized with and added to a Volume Group (vg) and then the Volume Group (vg) acts as a "virtual hard drive" in which you must create partitions or Logical Volumes (lv). This can be done in KDE's <code>partitionmanager</code>, Gnome/MATE/XFCE's <code>gparted</code>, or in CLI. I'll assume the GUI methods can be self explanitory if you look around them, so I'll just show you the CLI way.</p>
+<p>Once you have your LVM partition, you need to initialize it as a Physical Volume. Assuming this partition is /dev/sda3:</p>
+<pre class="clear">sudo pvcreate /dev/sda3</pre>
+
+<p>This writes the LVM header to the partition, which identifies it as a Physical Volume, and sets up a small area to hold the metadata describing everything about the Volume Group, and the the rest of the partition as unused Physical Extents. After that, you need to create a Volume Group and name it:</p>
+<pre class="clear">sudo vgcreate {Your VG Name Here} /dev/sda3</pre>
+
+<p>Now you have a named Volume Group. It contains only one Physical Volume. Now you'll want to create a Logical Volume from some of the free space in your volume group:</p>
+<pre class="clear">sudo lvcreate -n {Your LV Name Here} -L 500g {Your VG Name Here}</pre>
+
+<p>This creates a named Logical Volume in your named Volume Group using 500 GB of space. If you are installing, you probably want to create a Logical Volume like this to use as a root filesystem, and one for swap, and maybe one for /home. You can find the block device for this Logical Volume in '/dev/{Your VG Name Here}/{Your LV Name Here}' or 'dev/mapper/{Your VG Name Here}-{Your LV Name Here}'.</p>
+<p>You might also want to try the lvs and pvs commands, which list the Logical Volumes and Physical Volumes respectively, and their more detailed variants; <code>lvdisplay</code> and <code>pvdisplay</code>.</p>
+<p>If you are doing this from the live image, once you have created your Logical Volumes from the terminal, you can run the calamres installer, and use manual partitioning to select how to use each Logical Volume, and then install.</p>
+<h2 id="resizing-partitions_1">Resizing Partitions</h2>
+<p>You can extend a Logical Volume with:</p>
+<pre class="clear">sudo lvextend -L +5g {Your VG Name Here}/{Your LV Name Here}</pre>
+
+<p>This will add 5 GB to the bar Logical Volume in the Volume Group. You can specify an absolute size if you want instead of a relative size by omitting the leading +. The space is allocated from any free space anywhere in the bar Volume Group. If you have multiple Physical Volumes you can add the names of one or more of them to the end of the command to limit which ones should be used to satisfy the request.</p>
+<p>After extending the Logical Volume you need to expand the filesystem to use the new space. For ext 3/4, you simply run:</p>
+<pre class="clear">sudo resize2fs /dev/{Your VG Name Here}/{Your LV Name Here}</pre>
+
+<h2 id="moving-partitions_1">Moving Partitions</h2>
+<p>If you only have one Physical Volume then you probably will not ever need to move, but if you add a new disk, you might want to. To move the Logical Volume bar off of Physical Volume /dev/sda3, you run:</p>
+<p><pre class="clear">sudo pvmove -n bar /dev/sda3</pre> </p>
+<p>If you omit the -n bar argument, then all Logical Volumes on the /dev/sda3 Physical Volume will be moved. If you only have one other Physical Volume, then that is where it will be moved to, or you can add the name of one or more specific Physical Volumes that should be used to satisfy the request, instead of any Physical Volume in the Volume Group with free space. This process can be resumed safely if interrupted by a crash or power failure, and can be done while the Logical Volume(s) in question are in use. You can also add -b to perform the move in the background and return immediately, or -i s to have it print how much progress it has made every s seconds. If you background the move, you can check its progress with the lvs command.</p>
+<h2 id="snapshots_1">Snapshots</h2>
+<p>When you create a snapshot, you create a new Logical Volume to act as a clone of the original Logical Volume. The snapshot volume initially does not use any space, but as changes are made to the original volume, the changed blocks are copied to the snapshot volume before they are changed, in order to preserve them. This means that the more changes you make to the origin, the more space the snapshot needs. If the snapshot volume uses all of the space allocated to it, then the snapshot is broken and can not be used any more, leaving you only with the modified origin. The lvs command will tell you how much space has been used in a snapshot Logical Volume. If it starts to get full, you might want to extend it with the lvextend command. To create a snapshot of the bar Logical Volume and name it snap, run:</p>
+<pre class="clear">sudo lvcreate -s -n snap -L 5g {Your VG Name Here}/{Your LV Name Here}</pre>
+
+<p>This will create a snapshot named <strong><em>snap</em></strong> of the original Logical Volume bar and allocate 5 GB of space for it. Since the snapshot volume only stores the ares of the disk that have changed since it was created, it can be much smaller than the original volume.</p>
+<p>While you have the snapshot, you can mount it if you wish and will see the original filesystem as it appeared when you made the snapshot. In the above example you would mount the /dev/{Your VG Name Here}/snap device. You can modify the snapshot without affecting the original, and the original without affecting the snapshot. If you take a snapshot of your root Logical Volume, and then upgrade some packages, or to the next whole distribution release, and then decide it isn't working out, you can merge the snapshot back into the origin volume, effectively reverting to the state at the time you made the snapshot. To do this, you simply run:</p>
+<pre class="clear">sudo lvconvert --merge {Your VG Name Here}/snap</pre>
+
+<p>If the origin volume of foo/snap is in use, it will inform you that the merge will take place the next time the volumes are activated. If this is the root volume, then you will need to reboot for this to happen. At the next boot, the volume will be activated and the merge will begin in the background, so your system will boot up as if you had never made the changes since the snapshot was created, and the actual data movement will take place in the background while you work.</p>
+<h2 id="mounting-additional-lvms-manually">Mounting Additional LVMs Manually</h2>
+<p>Mounting an LVM may seem a bit intimidating, it's not. In reality, despite the length of this entry, you will only be running a handful of commands, and most of those just to get the needed information. Do not despair, this will be as painless as possible. All of these commands will be run as root from a terminal. Please also remember that your volume names may differ from the guide, please make sure to adjust accordingly.</p>
+<pre class="clear">root@localhost # pvs </pre>
+
+<p>This should give you an output similar to
+<pre class="clear">root@localhost # pvs
+  PV         VG         Fmt  Attr PSize PFree 
+  /dev/sdb1  VolGroup00 lvm2 a-   7.88G 32.00M
+</pre>
+If we look closely we can see that /dev/sdb1 holds a lvm that is 7.88 gig in size. In this case, that's the one we want, as it is the only one.</p>
+<p>So now we want to see what is actually in that lvm
+<pre class="clear">
+root@localhost # lvdisplay /dev/VolGroup00
+  --- Logical volume ---
+  LV Name                /dev/VolGroup00/LogVol00
+  VG Name                VolGroup00
+  LV UUID                SWp2V0-1xPU-0tOP-UnPs-snxF-THUl-pZMKb2
+  LV Write Access        read/write
+  LV Status              available
+  # open                 0
+  LV Size                6.88 GB
+  Current LE             220
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           251:0</p>
+<p>--- Logical volume ---
+  LV Name                /dev/VolGroup00/LogVol01
+  VG Name                VolGroup00
+  LV UUID                MGBeJP-ohrX-KLju-5V78-iJOi-pP3w-huaOmC
+  LV Write Access        read/write
+  LV Status              available
+  # open                 0
+  LV Size                992.00 MB
+  Current LE             31
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           251:1
+  </pre>
+We are looking for two things out of that list: <strong><em>LV name</em></strong> and <strong><em>LV Size</em></strong>. We have one that is <strong><em>6.88 GB</em></strong> and one that is <strong><em>992 MB</em></strong>. We can safely assume that the smaller of the two is /swap so the larger must be our real filesystem. That one is named <strong><em>/dev/VolGroup00/LogVol00</em></strong>.</p>
+<p>So now we have all the information that we need. We need only to make a mount point and actually mount the volume.
+<pre class="clear"></p>
+<h1 id="cd-mnt">cd /mnt</h1>
+<h1 id="mkdir-lvm">mkdir lvm</h1>
+<h1 id="vgscan-mknodes">vgscan --mknodes</h1>
+<h1 id="lvchange-a-y-devvolgroup00logvol00">lvchange -a y /dev/VolGroup00/LogVol00</h1>
+<h1 id="mount-devvolgroup00logvol00-mntlvm">mount /dev/VolGroup00/LogVol00 /mnt/lvm</h1>
+</pre>
+
+<p>If all went well then we can now get inside and look around, make changes, chroot in, or whatever caused us to want to mount the LVM in the first place.</p>
+<h2 id="mounting-additional-lvms-automatically-using-a-script">Mounting Additional LVMs Automatically using a script</h2>
+<p>The following is a script that will do all of that for you, in a slightly different way. You need only copy and paste the text in the box below to a text file that you make on your system. Once you copy and paste, save the file and go root, alternately you may download the script file [http://forum.sabayonlinux.org/viewtopic.php?f=86&amp;t=17272&amp;p=99187#p99187 this thread] from the forums. If you download from the forums, don't forget to rename the file lvm-mount.sh . Either way you do it, after the file is saved you need to go root and run the following commands:</p>
+<pre class="clear">
+# chmod a+x lvm-mount.sh
+# sh lvm-mount.sh 
+</pre>
+
+<p>The script will then run and let you know where is mounted your LVM(s) for you. It will also print instructions on your screen as to how to chroot in to the LVM if that was what you were needing to do.</p>
+<p><code>lvm-mount.sh</code>
+<pre class="clear"></p>
+<h1 id="binbash">! /bin/bash</h1>
+<h2 id="this-script-is-released-under-the-gpl-version-2">This script is released under the GPL version 2</h2>
+<h2 id="copyright-2009-james-cook">copyright (2009) James Cook</h2>
+<h2 id="thanks-goes-to-klaus-knopper-who-reminded-me-of-something">Thanks goes to Klaus Knopper who reminded me of something</h2>
+<h2 id="very-simple-that-i-had-forgotten-at-the-time-thanks-bud">very simple that I had forgotten at the time, thanks bud.</h2>
+<h2 id="the-author-may-be-contacted-at">the author may be contacted at:</h2>
+<h2 id="azerthoth-at-gmailcom">azerthoth (at) gmail.com</h2>
+<h2 id="check-for-user-is-root">Check for user is root</h2>
+<h2 id="thanks-to-micia-for-the-suggestion">Thanks to micia for the suggestion</h2>
+<p>if [ $UID -ne 0 ]; then
+   echo "You need to be root to run this script!"
+   exit 1
+fi</p>
+<h2 id="get-them-all-into-devmapper">get them all into /dev/mapper</h2>
+<p>modprobe dm-mod 2&gt; /dev/null || :
+vgscan --ignorelockingfailure --mknodes || :
+vgchange -aly --ignorelockingfailure || return 2
+clear
+mkdir /LVM
+cd /dev/mapper</p>
+<h2 id="create-directories-and-mount">Create directories and mount</h2>
+<p>for FILE in *; do
+test -b "$FILE" &amp;&amp; mkdir /LVM/$FILE &amp;&amp; mount /dev/mapper/$FILE /LVM/$FILE 2&gt;/dev/null
+done</p>
+<h2 id="list-good-partitions">List good partitions</h2>
+<p>echo "Cleaning up LVMs that were swap partitions or with unsupported"
+echo "File Systems from the list. This will not effect those partitions"
+echo "There is just no need to list or parse them"
+rmdir /LVM/Vol* 2&gt;/dev/null"
+echo " "
+echo "The following LVM(s) were mounted for you and are ready to use"
+echo " "
+ls /LVM
+echo " "
+echo "You can find them in /LVM"
+echo " "</p>
+<h2 id="chroot-instructions">chroot instructions</h2>
+<p>echo "If you are rescuing/fixing a previous installation please issue"
+echo "the following commands"
+echo "cp -L /etc/resolv.conf /LVM/<your_lvm_name>/etc/resolv.conf"
+echo "mount -t proc none /LVM/<your_lvm_name>/proc"
+echo "mount -o bind /dev /LVM/<your_lvm_name>/dev"
+echo "chroot /LVM/<your_lvm_name> /bin/bash"
+echo "env-update"
+echo "source /etc/profile"</p>
+<h2 id="this-process-may-also-be-interactively-automated-in-the-future">this process may also be interactively automated in the future</h2>
+<h2 id="more-coffee-and-ambition-is-needed">more coffee and ambition is needed</h2>
+</pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.9e1f3b71.js"></script>
+      
+      <script>app.initialize({version:"1.0.1",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
