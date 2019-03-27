@@ -7,7 +7,7 @@ You can learn more about it here https://www.wireguard.com/ and https://restorep
 ## Setting up Wireguard
 
 First you'll need to install wireguard as it hasn't been submitted to the mainline kernel yet. Then as you user (NOT ROOT) you'll want to generate your keys similar to generating Private an Public SSH keys. THis will need done both Server and Client(s) side.
-<pre class="clear"> 
+<pre class="clear">
 sudo equo install wireguard
 sudo modprobe wireguard
 mkdir .wireguard 
@@ -17,7 +17,7 @@ wg genkey | tee privatekey | wg pubkey > publickey
 
 Next, as root, you'll want to add your config for a wireguard interface
 
-<pre class="clear"> 
+<pre class="clear">
 # mkdir /etc/wireguard
 # touch /etc/wireguard/wg0.conf
 # nano /etc/wireguard/wg0.conf
