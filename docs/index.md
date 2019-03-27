@@ -25,7 +25,7 @@ We are starting a fresh wiki and need your help with rebuilding material to help
   <tr>
     <th class="tg-0lax">- Multiple Supported Repos</th>
     <th class="tg-0lax">- Community Repos</th>
-    <th class="tg-0lax">- Personal Repos</th>    
+    <th class="tg-0lax">- Personal Repos</th>
   </tr>
   <tr>
     <th class="tg-0lax">- Rolling Release</td>
@@ -41,7 +41,7 @@ We are starting a fresh wiki and need your help with rebuilding material to help
     <th class="tg-0lax">- Run From USB</td>
     <th class="tg-0lax">- Calamares Installer</td>
     <th class="tg-0lax">- Multiple Desktop Environments</td>
-  </tr>        
+  </tr>
 </table>
 </div>
 
@@ -58,7 +58,7 @@ We are starting a fresh wiki and need your help with rebuilding material to help
   <tr>
     <th class="tg-0lax">Development</th>
     <th class="tg-0lax">Social</th>
-    <th class="tg-0lax">Services</th>    
+    <th class="tg-0lax">Services</th>
   </tr>
   <tr>
     <td class="tg-0lax">
@@ -99,9 +99,9 @@ We are starting a fresh wiki and need your help with rebuilding material to help
     <td class="tg-0lax">
        <ul>
         <li>
-			<a href="https://www.sabayon.org/donate">Donate</a>&nbsp; - &nbsp;
-			<a href="/cdn-cgi/l/email-protection#b9cedcdbd4d8cacddccbf9cad8dbd8c0d6d7d5d0d7ccc197d6cbde">
-			Contact Us</a>
+        <a href="https://www.sabayon.org/donate">Donate</a>&nbsp; - &nbsp;
+        <a href="/cdn-cgi/l/email-protection#b9cedcdbd4d8cacddccbf9cad8dbd8c0d6d7d5d0d7ccc197d6cbde">
+        Contact Us</a>
       </li>
       <li>
       <a href="https://pastebin.sabayon.org/">Pastebin</a>
@@ -122,7 +122,7 @@ We are starting a fresh wiki and need your help with rebuilding material to help
       <a href="https://www.sabayon.org/press">Press Documentation</a>
       </li>
       </ul>
-    </td>    
-  </tr>    
+    </td>
+  </tr>
 </table>
 </div>
