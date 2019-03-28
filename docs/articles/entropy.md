@@ -24,7 +24,7 @@ Sabayon is based on Gentoo's testing branch, which is about on par with Debian S
 * Extensible and Human Understandable API
 * Strongest Artificial Intelligence (Entropy has a brain)
 * Great sense of humour, and much more...
-    
+
 ## Basic Usage
 
 Equo is the command line client-side application for the Entropy package management system, and should be always performed as Root. It is capable of installing, removing and updating packages, resolving dependences, reverse dependency handling and configuration file handling and that's just to start with.
@@ -53,7 +53,7 @@ As you can see from the examples above, the "--ask" amendment is optional, but h
 You can always use help to see a complete list of commands
 
      equo --help
-     
+
 ## Rigo
 
 Rigo is the graphical user interface for package management.
@@ -71,7 +71,7 @@ Rigo is the graphical user interface for package management.
 * "Activity" button (bottom notification box), that shows the current app management queue.
 * Send votes and add comments to Packages
 * and much more...
-    
+
 [![Click to make Bigger](http://photosbykjs.us/sabayon/rigo1-1.jpg)](http://photosbykjs.us/sabayon/rigo1.png)
 [![Click to make Bigger](http://photosbykjs.us/sabayon/rigo2-2.jpg)](http://photosbykjs.us/sabayon/rigo2.png)
 
