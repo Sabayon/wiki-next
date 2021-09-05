@@ -6,7 +6,7 @@ You can edit articles from the browser or by using git to clone and do a pull re
 
 * Click the pencil icon on the screen
 
-![Step 1](../img/doc1-1.jpg)
+![Step 1](../img/step1_editing.png)
 
 * Make your changes
 
