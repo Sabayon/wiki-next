@@ -6,15 +6,15 @@ You can edit articles from the browser or by using git to clone and do a pull re
 
 * Click the pencil icon on the screen
 
-![](../img/doc1-1.jpg)
+![Step 1](../img/step1_editing.png)
 
 * Make your changes
 
-![](../img/doc2-1.jpg)
+![Step 2](../img/doc2-1.jpg)
 
 * Submit your changes
 
-![](../img/doc3-1.jpg)
+![Step 3](../img/doc3-1.jpg)
 
 
 ## Git
